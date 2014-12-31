@@ -14,13 +14,13 @@ Find line
 and replace it with
         make recoveryzip
 beacause it wont eat your RAM and build will be faster
-        _______________________________________________________________________
+
 
 After you finshed repo sync go in your working dir/device/
 and create folder /samsung/kanas3gnfcxx and copy content of kanas3gnfcxx
 that you downloaded from here.
 And make changes if you like.
-        _______________________________________________________________________
+
 Than run comannd in terminal from your working dir
 
         . build/envsetup.sh
@@ -29,7 +29,7 @@ Than run comannd in terminal from your working dir
 
 Your build will start and you will find your recovery. img in
 your working dir/out/target/product/kanas3gnfcxx
-        _______________________________________________________________________
+
 To make it flashable via ODIN you have to make it recovery.tar.md5
 Navigate with terminal where your recovey.img is.
 For example cd android/out/target/product/kanas3gnfcxx
