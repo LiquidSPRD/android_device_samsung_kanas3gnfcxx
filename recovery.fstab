@@ -5,5 +5,4 @@
 /dev/block/mmcblk0p14                       /efs             ext4	  ro,barrier=1                            wait
 /dev/block/mmcblk0p20                       /system          ext4	  ro,barrier=1                            wait
 /dev/block/mmcblk0p22                       /data            ext4	  nosuid,nodev,noauto_da_alloc,barrier=1  wait,length=-16384
-/dev/block/mmcblk0                          /sdcard0         vfat	  default
 /dev/block/platform/sprd-sdhci.0/mmcblk1p1  /sdcard          vfat   default
