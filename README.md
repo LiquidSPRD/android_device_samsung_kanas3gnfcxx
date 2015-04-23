@@ -26,5 +26,5 @@ Sync and build:
     repo sync -j4
     vendor/cm/get-prebuilts
     . build/envsetup.sh
-    brunch G355HN
+    brunch kanas3gnfcxx
 
