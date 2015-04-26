@@ -13,8 +13,6 @@ persist.storage.type=1
 # delay for ConnectivityChange broadcast (ms)
 conn.connectivity_change_delay = 0
 
-ro.product.partitionpath=/dev/block/platform/sprd-sdhci.3/by-name/
-
 persist.modem.w.enable=1
 ro.modem.w.dev=/dev/cpw
 ro.modem.w.tty=/dev/stty_w

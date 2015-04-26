@@ -284,6 +284,7 @@ on fs
    chown bluetooth net_bt_stack ro.bt.bdaddr_path
    symlink /system/etc/dbus.conf /etc/dbus.conf
    symlink /system/etc/bluetooth /etc/bluetooth
+   mkdir /efs/bluetooth 0775 radio system
    mkdir /data/misc 01771 system misc
    mkdir /data/misc/bluetoothd 0770 bluetooth bluetooth
    mkdir /data/misc/bluetooth 0770 system system

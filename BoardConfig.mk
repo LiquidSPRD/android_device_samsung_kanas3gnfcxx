@@ -15,8 +15,7 @@ ARCH_ARM_HAVE_TLS_REGISTER := true
 
 TARGET_BOOTLOADER_BOARD_NAME := sc8830
 
-BOARD_KERNEL_CMDLINE := console=ttyDCC0,115200n8 init=/init vram=16M mem=88M
-BOARD_KERNEL_BASE := 0x11000000
+BOARD_KERNEL_CMDLINE := init=/sbin/init root=/dev/ram rw initrd=0x11000000,16M console=ttyDCC0 mem=88M
 BOARD_KERNEL_PAGESIZE := 4096
 
 TARGET_USERIMAGES_USE_EXT4 := true
@@ -33,6 +32,7 @@ BOARD_USES_ALSA_AUDIO := true
 # Kernel
 TARGET_KERNEL_SOURCE := kernel/samsung/kanas3gnfcxx
 TARGET_KERNEL_CONFIG := kanas3gnfc_hw04_defconfig
+TARGET_USES_UNCOMPRESSED_KERNEL := true
 
 BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_HAS_LARGE_FILESYSTEM := true
@@ -85,6 +85,8 @@ BOARD_CHARGING_MODE_BOOTING_LPM := /sys/class/power_supply/battery/batt_lp_charg
 
 # NFC
 BOARD_HAVE_NFC := true
+
+TARGET_USES_ION := true
 
 DEVICE_RESOLUTION := 480x800
 

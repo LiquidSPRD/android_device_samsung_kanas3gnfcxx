@@ -21,6 +21,8 @@ PRODUCT_COPY_FILES += \
 	device/samsung/kanas3gnfcxx/fstab.kanas3gnfcxx:root/fstab.kanas3gnfcxx \
 	device/samsung/kanas3gnfcxx/init.board.rc:root/init.board.rc \
 	device/samsung/kanas3gnfcxx/init.kanas3gnfc_base.rc:root/init.kanas3gnfc_base.rc \
+	device/samsung/kanas3gnfcxx/property_contexts:root/property_contexts \
+	device/samsung/kanas3gnfcxx/init.usb.rc:root/init.usb.rc
 
 PRODUCT_COPY_FILES += \
 	device/samsung/kanas3gnfcxx/media_codecs.xml:system/etc/media_codecs.xml \
@@ -86,11 +88,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     libskia_legacy
 
-PRODUCT_PACKAGES += \
-    libmm-omxcore \
-    libOmxCore \
-    libstagefrighthw
-
 # These are the hardware-specific settings that are stored in system properties.
 # Note that the only such settings should be the ones that are too low-level to
 # be reachable from resources or other mechanisms.
@@ -98,9 +95,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     wifi.interface=wlan0 \
     mobiledata.interfaces=rmnet0 \
     ro.telephony.ril_class=SamsungBCMRIL \
-    ro.zygote.disable_gl_preload=true \
     ro.cm.hardware.cabc=/sys/class/mdnie/mdnie/cabc \
-    persist.radio.multisim.config=dsds \
     ro.telephony.call_ring.multiple=0 \
     ro.telephony.call_ring=0 \
 
