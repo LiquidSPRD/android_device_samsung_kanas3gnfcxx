@@ -16,6 +16,7 @@ ARCH_ARM_HAVE_TLS_REGISTER := true
 TARGET_BOOTLOADER_BOARD_NAME := sc8830
 
 BOARD_KERNEL_CMDLINE := init=/sbin/init root=/dev/ram rw initrd=0x11000000,16M console=ttyDCC0 mem=88M
+BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 4096
 
 TARGET_USERIMAGES_USE_EXT4 := true
@@ -36,10 +37,6 @@ TARGET_USES_UNCOMPRESSED_KERNEL := true
 
 BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_HAS_LARGE_FILESYSTEM := true
-
-# Compiler flags
-TARGET_GLOBAL_CFLAGS += -mfloat-abi=softfp -mfpu=neon-vfpv4 -mtune=cortex-a5
-TARGET_GLOBAL_CPPFLAGS += -mfloat-abi=softfp -mfpu=neon-vfpv4 -mtune=cortex-a5
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
@@ -73,7 +70,11 @@ USE_OPENGL_RENDERER := true
 BOARD_EGL_CFG := device/samsung/kanas3gnfcxx/egl.cfg
 BOARD_USE_MHEAP_SCREENSHOT := true
 BOARD_EGL_WORKAROUND_BUG_10194508 := true
+BOARD_EGL_NEEDS_LEGACY_FB := true
 TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := true
+
+# Platform
+COMMON_GLOBAL_CFLAGS += -DSPRD_HARDWARE
 
 # Bootanimation
 TARGET_BOOTANIMATION_PRELOAD := true
