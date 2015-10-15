@@ -1,4 +1,4 @@
-USE_CAMERA_STUB := true
+USE_CAMERA_STUB := false
 
 # inherit from the proprietary version
 -include vendor/samsung/kanas3gnfcxx/BoardConfigVendor.mk
@@ -33,7 +33,6 @@ BOARD_USES_ALSA_AUDIO := true
 # Kernel
 TARGET_KERNEL_SOURCE := kernel/samsung/kanas3gnfcxx
 TARGET_KERNEL_CONFIG := kanas3gnfc_hw04_defconfig
-TARGET_USES_UNCOMPRESSED_KERNEL := true
 
 BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_HAS_LARGE_FILESYSTEM := true
