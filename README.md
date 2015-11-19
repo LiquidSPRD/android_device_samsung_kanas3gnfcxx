@@ -5,9 +5,43 @@ Device configuration for Samsung Galaxy Core II SM-G355HN
 How to Build
 ---------------
 
-Initialise from CyanogenMod:
+Repo is a tool that makes it easier to work with Git in the context of Android.
 
-    repo init -u git://github.com/CyanogenMod/android.git -b cm-11.0
+To install Repo:
+
+ 
+
+   Create bin directory in your home directory and that it is included in your path:
+
+mkdir ~/bin
+PATH=~/bin:$PATH
+    Download the Repo tool and ensure that it is executable:
+
+curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
+chmod a+x ~/bin/repo
+    Create a directory for your working files:
+
+mkdir android
+your WORKING_DIRECTORY
+
+cd android
+Run repo init to bring down the latest version of Repo with all its most recent bug fixes. You must specify a URL for the manifest, which specifies where the various repositories included in the Android source will be placed within your working directory.
+
+NOTE:
+.repo is hidden in android folder. To see it hit Ctrl+h in open android folder.
+
+ 
+
+ 
+
+repo init:
+
+repo init -u https://android.googlesource.com/platform/manifest
+For example and test we will use chill360 source for build:
+
+repo init -u git://github.com/SlimRoms/platform_manifest.git -b kk4.4-caf
+mkdir .repo/local_manifests
+Copy local_manifest.xml to .repo/local_manifests
 
 Use the following local manifest:
 
