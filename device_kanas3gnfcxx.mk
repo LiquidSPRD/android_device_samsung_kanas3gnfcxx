@@ -6,7 +6,8 @@ $(call inherit-product, device/common/gps/gps_us_supl.mk)
 $(call inherit-product-if-exists, vendor/samsung/kanas3gnfcxx/kanas3gnfcxx-vendor.mk)
 
 # Use high-density artwork where available
-PRODUCT_LOCALES += hdpi
+PRODUCT_AAPT_CONFIG := normal hdpi
+PRODUCT_AAPT_PREF_CONFIG := hdpi
 
 DEVICE_PACKAGE_OVERLAYS += device/samsung/kanas3gnfcxx/overlay
 
@@ -31,10 +32,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
 	device/samsung/kanas3gnfcxx/bcm_headset.kl:system/usr/keylayout/bcm_headset.kl \
 	device/samsung/kanas3gnfcxx/bcm_keypad_v2.kl:system/usr/keylayout/bcm_keypad_v2.kl \
-	device/samsung/kanas3gnfcxx/cyttsp4_btn.kl:system/usr/keylayout/cyttsp4_btn.kl \
+	device/samsung/kanas3gnfcxx/sci-keypad.kl:system/usr/keylayout/sci-keypad.kl\
 	device/samsung/kanas3gnfcxx/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
-	device/samsung/kanas3gnfcxx/samsung-keypad.kl:system/usr/keylayout/samsung-keypad.kl \
-	device/samsung/kanas3gnfcxx/sii9234_rcp.kl:system/usr/keylayout/sii9234_rcp.kl
+	device/samsung/kanas3gnfcxx/samsung-keypad.kl:system/usr/keylayout/samsung-keypad.kl
 
 # Filesystem management tools
 PRODUCT_PACKAGES += \
@@ -44,12 +44,48 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
 	com.android.future.usb.accessory
 
-# Misc other modules
+# graphics modules
+PRODUCT_PACKAGES += \
+	libEGL_mali.so \
+	libGLESv1_CM_mali.so \
+	libGLESv2_mali.so \
+	libMali.so \
+	libboost.so \
+	mali.ko
+
+# video modules
+PRODUCT_PACKAGES += \
+	libstagefright_sprd_soft_mpeg4dec \
+	libstagefright_sprd_soft_h264dec \
+	libstagefright_sprd_mpeg4dec \
+	libstagefright_sprd_mpeg4enc \
+	libstagefright_sprd_h264dec \
+	libstagefright_sprd_h264enc \
+	libstagefright_sprd_vpxdec \
+	libstagefright_soft_mjpgdec \
+	libstagefright_soft_imaadpcmdec \
+	libstagefright_sprd_aacdec \
+	libstagefright_sprd_mp3dec \
+	libstagefright_sprd_apedec
+
+# default audio
 PRODUCT_PACKAGES += \
 	audio.a2dp.default \
 	audio.usb.default \
 	audio.r_submix.default \
-	audio_policy.sc8830
+	libaudio-resampler
+
+# sprd HAL modules
+PRODUCT_PACKAGES += \
+	audio.primary.sc8830 \
+	audio_policy.sc8830 \
+	gralloc.sc8830 \
+	camera.sc8830 \
+	camera2.sc8830 \
+	lights.sc8830 \
+	hwcomposer.sc8830 \
+	sprd_gsp.sc8830
+	sensors.sc8830
 
 # Device-specific packages
 PRODUCT_PACKAGES += \
