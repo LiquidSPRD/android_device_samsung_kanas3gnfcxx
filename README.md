@@ -19,9 +19,10 @@ To install Repo:
 
     curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
     chmod a+x ~/bin/repo
-    Create a directory for your working files:
+   Create a directory for your working files:
+
     mkdir android
-    
+    cd android
 your WORKING_DIRECTORY (android folder)
 
 cd android
