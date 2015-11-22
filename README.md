@@ -4,6 +4,15 @@ android_device_samsung_core2
 Device configuration for Samsung Galaxy Core II SM-G355HN
 How to Build
 ---------------
+install java:
+
+    sudo add-apt-repository ppa:webupd8team/java
+    sudo apt-get update
+    sudo apt-get install oracle-java6-installer
+
+needed packages:
+
+    sudo apt-get install lib32z1 git-core gnupg flex bison gperf libsdl1.2-dev libesd0-dev libwxgtk2.8-dev squashfs-tools build-essential lzop zip curl libncurses5-dev zlib1g-dev pngcrush schedtool libxml2 libxml2-utils xsltproc g++-multilib lib32z1-dev lib32ncurses5-dev lib32readline-gplv2-dev gcc-multilib
 
 Repo is a tool that makes it easier to work with Git in the context of Android.
 
@@ -15,17 +24,19 @@ To install Repo:
 
     mkdir ~/bin
     PATH=~/bin:$PATH
+    
    Download the Repo tool and ensure that it is executable:
 
     curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
     chmod a+x ~/bin/repo
+    
    Create a directory for your working files:
 
     mkdir android
     cd android
+    
 your WORKING_DIRECTORY (android folder)
 
-cd android
 Run repo init to bring down the latest version of Repo with all its most recent bug fixes. You must specify a URL for the manifest, which specifies where the various repositories included in the Android source will be placed within your working directory.
 
 NOTE:
@@ -34,12 +45,10 @@ NOTE:
 repo init:
 
     repo init -u https://android.googlesource.com/platform/manifest
-
-repo init -u git://github.com/CyanogenMod/android.git -b cm-11.0
-
+    repo init -u git://github.com/CyanogenMod/android.git -b cm-11.0
     mkdir .repo/local_manifests
     
-Copy local_manifest.xml to .repo/local_manifests
+Copy local_manifests.xml to .repo/local_manifests
 
 Use the following local manifest:
 
