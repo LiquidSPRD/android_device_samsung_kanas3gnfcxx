@@ -32,7 +32,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
 	device/samsung/kanas3gnfcxx/bcm_headset.kl:system/usr/keylayout/bcm_headset.kl \
 	device/samsung/kanas3gnfcxx/bcm_keypad_v2.kl:system/usr/keylayout/bcm_keypad_v2.kl \
-	device/samsung/kanas3gnfcxx/sci-keypad.kl:system/usr/keylayout/sci-keypad.kl\
 	device/samsung/kanas3gnfcxx/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
 	device/samsung/kanas3gnfcxx/samsung-keypad.kl:system/usr/keylayout/samsung-keypad.kl
 
@@ -84,7 +83,7 @@ PRODUCT_PACKAGES += \
 	camera2.sc8830 \
 	lights.sc8830 \
 	hwcomposer.sc8830 \
-	sprd_gsp.sc8830
+	sprd_gsp.sc8830 \
 	sensors.sc8830
 
 # Device-specific packages
