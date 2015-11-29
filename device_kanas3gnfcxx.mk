@@ -9,6 +9,8 @@ $(call inherit-product-if-exists, vendor/samsung/kanas3gnfcxx/kanas3gnfcxx-vendo
 PRODUCT_AAPT_CONFIG := normal hdpi
 PRODUCT_AAPT_PREF_CONFIG := hdpi
 
+PRODUCT_TAGS += dalvik.gc.type-precise
+
 DEVICE_PACKAGE_OVERLAYS += device/samsung/kanas3gnfcxx/overlay
 
 # Init files
@@ -132,9 +134,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
     gsm.version.baseband=2030 \
     rild.libpath=/system/lib/libreference-ril_sp.so \
     ro.telephony.ril_class=SamsungBCMRIL \
+    ril.subscription.types=NV,RUIM \
+    rild.libargs=-d/dev/smd0 \
+    ro.telephony.call_ring.delay=3000 \
+    ro.telephony.call_ring.multiple=false
     ro.cm.hardware.cabc=/sys/class/mdnie/mdnie/cabc \
-    ro.telephony.call_ring.multiple=0 \
-    ro.telephony.call_ring=0 \
+    ro.telephony.call_ring=0
 
 # enable Google-specific location features,
 # like NetworkLocationProvider and LocationCollector
