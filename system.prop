@@ -74,7 +74,7 @@ persist.sys.storage_preload=1
 # ADDITIONAL_BUILD_PROPERTIES
 #
 persist.sys.sprd.modemreset=0
-ro.adb.secure=1
+ro.adb.secure=0
 persist.sys.sprd.wcnreset=1
 ro.storage.flash_type=2
 keyguard.no_require_sim=true

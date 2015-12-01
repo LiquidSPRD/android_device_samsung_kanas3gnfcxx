@@ -5,6 +5,9 @@ on init
 on early-boot
     #chown bluetooth net_bt_stack /dev/ttyS0
     chmod 0660 /dev/ttyS0
+    chown system system /efs/FactoryApp/prodcode
+    chmod 0744 /efs/FactoryApp/prodcode
+
 # add for emulated internal storage as primary @{
 on early-fs
     symlink /storage/emulated/legacy /sdcard

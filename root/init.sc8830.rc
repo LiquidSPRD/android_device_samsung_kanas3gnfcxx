@@ -260,12 +260,6 @@ service modemd /system/bin/modemd
     group system radio shell
     oneshot
 
-service wcnd /system/bin/wcnd
-    class core
-    user system
-    group system shell wifi inet net_bt_stack
-    oneshot
-
 service phoneserver_t /system/bin/phoneserver -m t
     class core
     user root
@@ -352,15 +346,14 @@ service slog /system/bin/slog -t
 service refnotify /system/bin/refnotify -t 0
     class main
     user system
-	group system radio shell
+    group system radio shell
     disabled
 
 
 service refnotify_w /system/bin/refnotify -t 1
     class main
     user system
-	group system radio shell
-    disabled
+    group system radio shell
 
 on property:persist.modem.w.enable=1
     symlink /dev/spipe_w1 /dev/vbpipe1
@@ -372,8 +365,7 @@ on property:persist.modem.w.enable=1
     symlink /dev/block/platform/sprd-sdhci.3/by-name/RUNTIMENV1 /dev/block/platform/sprd-sdhci.3/by-name/runtimenv1 
     symlink /dev/block/platform/sprd-sdhci.3/by-name/RUNTIMENV2 /dev/block/platform/sprd-sdhci.3/by-name/runtimenv2 
     
-    start nvitemd_w
-	start refnotify_w
+	start nvitemd_w
 
 on property:persist.modem.t.enable=1
     start nvitemd_td
@@ -430,14 +422,7 @@ service  recoveryfreq  /system/bin/recoveryfreq.sh
     user root
     disabled
     oneshot
-
-# SRT server
-service srtd /system/xbin/srtd
-    class main
-    socket srtserver stream 0777 system system
-    user root
-    group root
-    oneshot
+	
 # LPM
 on property:ro.bootmode=charger
 	mount ext4 /dev/block/platform/sprd-sdhci.3/by-name/system /system  wait ro

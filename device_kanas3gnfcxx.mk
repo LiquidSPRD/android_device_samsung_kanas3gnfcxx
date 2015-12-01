@@ -6,7 +6,7 @@ $(call inherit-product, device/common/gps/gps_us_supl.mk)
 $(call inherit-product-if-exists, vendor/samsung/kanas3gnfcxx/kanas3gnfcxx-vendor.mk)
 
 # Use high-density artwork where available
-PRODUCT_AAPT_CONFIG := normal hdpi
+PRODUCT_AAPT_CONFIG := normal ldpi mdpi hdpi xhdpi xxhdpi
 PRODUCT_AAPT_PREF_CONFIG := hdpi
 
 PRODUCT_TAGS += dalvik.gc.type-precise
@@ -15,17 +15,24 @@ DEVICE_PACKAGE_OVERLAYS += device/samsung/kanas3gnfcxx/overlay
 
 # Init files
 PRODUCT_COPY_FILES += \
-	device/samsung/kanas3gnfcxx/init.sc8830_ss.rc:root/init.sc8830_ss.rc \
-	device/samsung/kanas3gnfcxx/init.sc8830.usb.rc:root/init.sc8830.usb.rc \
-	device/samsung/kanas3gnfcxx/init.trace.rc:root/init.trace.rc \
-	device/samsung/kanas3gnfcxx/init.kanas3gnfc.rc:root/init.kanas3gnfc.rc \
-	device/samsung/kanas3gnfcxx/init.sc8830.rc:root/init.sc8830.rc \
-	device/samsung/kanas3gnfcxx/ueventd.sc8830.rc:root/ueventd.sc8830.rc \
-	device/samsung/kanas3gnfcxx/fstab.kanas3gnfcxx:root/fstab.kanas3gnfcxx \
-	device/samsung/kanas3gnfcxx/init.board.rc:root/init.board.rc \
-	device/samsung/kanas3gnfcxx/init.kanas3gnfc_base.rc:root/init.kanas3gnfc_base.rc \
-	device/samsung/kanas3gnfcxx/property_contexts:root/property_contexts \
-	device/samsung/kanas3gnfcxx/init.usb.rc:root/init.usb.rc
+	device/samsung/kanas3gnfcxx/root/init.sc8830_ss.rc:root/init.sc8830_ss.rc \
+	device/samsung/kanas3gnfcxx/root/init.sc8830.usb.rc:root/init.sc8830.usb.rc \
+	device/samsung/kanas3gnfcxx/root/init.sc8830.rc:root/init.sc8830.rc \
+	device/samsung/kanas3gnfcxx/root/init.trace.rc:root/init.trace.rc \
+	device/samsung/kanas3gnfcxx/root/init.kanas3gnfc.rc:root/init.kanas3gnfc.rc \
+	device/samsung/kanas3gnfcxx/root/init.environ.rc:root/init.environ.rc \
+	device/samsung/kanas3gnfcxx/root/init.usb.rc:root/init.usb.rc \
+	device/samsung/kanas3gnfcxx/root/init.board.rc:root/init.board.rc \
+	device/samsung/kanas3gnfcxx/root/init.kanas3gnfc_base.rc:root/init.kanas3gnfc_base.rc \
+	device/samsung/kanas3gnfcxx/root/init.rc:root/init.rc \
+	device/samsung/kanas3gnfcxx/root/init.wifi.rc:root/init.wifi.rc \
+	device/samsung/kanas3gnfcxx/root/modem_control:root/modem_control \
+	device/samsung/kanas3gnfcxx/root/seapp_contexts:root/seapp_contexts \
+	device/samsung/kanas3gnfcxx/root/sepolicy:root/sepolicy \
+	device/samsung/kanas3gnfcxx/root/ueventd.sc8830.rc:root/ueventd.sc8830.rc \
+	device/samsung/kanas3gnfcxx/root/file_contexts:root/file_contexts \
+	device/samsung/kanas3gnfcxx/root/fstab.kanas3gnfcxx:root/fstab.kanas3gnfcxx \
+	device/samsung/kanas3gnfcxx/root/property_contexts:root/property_contexts
 
 PRODUCT_COPY_FILES += \
 	device/samsung/kanas3gnfcxx/media_codecs.xml:system/etc/media_codecs.xml \
