@@ -8,7 +8,7 @@ TARGET_NO_BOOTLOADER := true
 TARGET_BOARD_PLATFORM := sc8830
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
-TARGET_ARCH_VARIANT := armv7-a-neon
+TARGET_ARCH_VARIANT := armv7-a
 TARGET_CPU_VARIANT := cortex-a7
 TARGET_CPU_SMP := true
 ARCH_ARM_HAVE_TLS_REGISTER := true
@@ -16,7 +16,7 @@ ARCH_ARM_HAVE_TLS_REGISTER := true
 TARGET_BOOTLOADER_BOARD_NAME := sc8830
 
 BOARD_KERNEL_CMDLINE := console=ttyS1,115200n8
-BOARD_KERNEL_BASE := 0x00000800
+BOARD_KERNEL_BASE := 0x00b830b0
 BOARD_KERNEL_PAGESIZE := 2048
 
 TARGET_USERIMAGES_USE_EXT4 := true
@@ -29,10 +29,13 @@ TARGET_USERIMAGES_SPARSE_EXT_DISABLED := true
 BOARD_USES_ALSA_AUDIO := true
 
 # config kernel
-TARGET_NO_KERNEL := false
-TARGET_USES_UNCOMPRESSED_KERNEL := true
-TARGET_KERNEL_SOURCE := kernel/samsung/kanas3gnfcxx
-TARGET_KERNEL_CONFIG := kanas3gnfc_hw03_defconfig
+
+TARGET_PREBUILT_KERNEL := $(LOCAL_PATH)/kernel
+
+file := $(INSTALLED_KERNEL_TARGET)
+ALL_PREBUILT += $(file)
+$(file): $(TARGET_PREBUILT_KERNEL) | $(ACP)
+    $(transform-prebuilt-to-target)
 
 BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_HAS_LARGE_FILESYSTEM := true
@@ -116,12 +119,6 @@ BOARD_HAVE_NFC := true
 TARGET_USES_ION := true
 
 DEVICE_RESOLUTION := 480x800
-
-# RIL
-BOARD_RIL_CLASS := ../../../device/samsung/kanas3gnfcxx/ril/
-
-# Recovery
-TARGET_RECOVERY_FSTAB := device/samsung/kanas3gnfcxx/fstab.kanas3gnfcxx
 
 # healthd
 BOARD_HAL_STATIC_LIBRARIES := libhealthd.kanas3gnfcxx

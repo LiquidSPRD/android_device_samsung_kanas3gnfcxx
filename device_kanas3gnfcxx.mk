@@ -15,24 +15,21 @@ DEVICE_PACKAGE_OVERLAYS += device/samsung/kanas3gnfcxx/overlay
 
 # Init files
 PRODUCT_COPY_FILES += \
-	device/samsung/kanas3gnfcxx/root/init.sc8830_ss.rc:root/init.sc8830_ss.rc \
-	device/samsung/kanas3gnfcxx/root/init.sc8830.usb.rc:root/init.sc8830.usb.rc \
-	device/samsung/kanas3gnfcxx/root/init.sc8830.rc:root/init.sc8830.rc \
-	device/samsung/kanas3gnfcxx/root/init.trace.rc:root/init.trace.rc \
-	device/samsung/kanas3gnfcxx/root/init.kanas3gnfc.rc:root/init.kanas3gnfc.rc \
-	device/samsung/kanas3gnfcxx/root/init.environ.rc:root/init.environ.rc \
-	device/samsung/kanas3gnfcxx/root/init.usb.rc:root/init.usb.rc \
-	device/samsung/kanas3gnfcxx/root/init.board.rc:root/init.board.rc \
-	device/samsung/kanas3gnfcxx/root/init.kanas3gnfc_base.rc:root/init.kanas3gnfc_base.rc \
-	device/samsung/kanas3gnfcxx/root/init.rc:root/init.rc \
-	device/samsung/kanas3gnfcxx/root/init.wifi.rc:root/init.wifi.rc \
-	device/samsung/kanas3gnfcxx/root/modem_control:root/modem_control \
-	device/samsung/kanas3gnfcxx/root/seapp_contexts:root/seapp_contexts \
-	device/samsung/kanas3gnfcxx/root/sepolicy:root/sepolicy \
-	device/samsung/kanas3gnfcxx/root/ueventd.sc8830.rc:root/ueventd.sc8830.rc \
-	device/samsung/kanas3gnfcxx/root/file_contexts:root/file_contexts \
-	device/samsung/kanas3gnfcxx/root/fstab.kanas3gnfcxx:root/fstab.kanas3gnfcxx \
-	device/samsung/kanas3gnfcxx/root/property_contexts:root/property_contexts
+	device/samsung/kanas3gnfcxx/init.sc8830_ss.rc:root/init.sc8830_ss.rc \
+	device/samsung/kanas3gnfcxx/init.sc8830.usb.rc:root/init.sc8830.usb.rc \
+	device/samsung/kanas3gnfcxx/init.sc8830.rc:root/init.sc8830.rc \
+	device/samsung/kanas3gnfcxx/init.kanas3gnfc.rc:root/init.kanas3gnfc.rc \
+	device/samsung/kanas3gnfcxx/init.environ.rc:root/init.environ.rc \
+	device/samsung/kanas3gnfcxx/init.board.rc:root/init.board.rc \
+	device/samsung/kanas3gnfcxx/init.kanas3gnfc_base.rc:root/init.kanas3gnfc_base.rc \
+	device/samsung/kanas3gnfcxx/init.rc:root/init.rc \
+	device/samsung/kanas3gnfcxx/init.wifi.rc:root/init.wifi.rc \
+	device/samsung/kanas3gnfcxx/modem_control:root/modem_control \
+	device/samsung/kanas3gnfcxx/seapp_contexts:root/seapp_contexts \
+	device/samsung/kanas3gnfcxx/sepolicy:root/sepolicy \
+	device/samsung/kanas3gnfcxx/ueventd.sc8830.rc:root/ueventd.sc8830.rc \
+	device/samsung/kanas3gnfcxx/file_contexts:root/file_contexts \
+	device/samsung/kanas3gnfcxx/property_contexts:root/property_contexts
 
 PRODUCT_COPY_FILES += \
 	device/samsung/kanas3gnfcxx/media_codecs.xml:system/etc/media_codecs.xml \
@@ -43,6 +40,7 @@ PRODUCT_COPY_FILES += \
 	device/samsung/kanas3gnfcxx/bcm_keypad_v2.kl:system/usr/keylayout/bcm_keypad_v2.kl \
 	device/samsung/kanas3gnfcxx/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
 	device/samsung/kanas3gnfcxx/samsung-keypad.kl:system/usr/keylayout/samsung-keypad.kl
+
 
 # Filesystem management tools
 PRODUCT_PACKAGES += \
@@ -81,12 +79,12 @@ PRODUCT_PACKAGES += \
 	audio.a2dp.default \
 	audio.usb.default \
 	audio.r_submix.default \
+	audio_policy.sc8830 \
 	libaudio-resampler
 
 # sprd HAL modules
 PRODUCT_PACKAGES += \
 	audio.primary.sc8830 \
-	audio_policy.sc8830 \
 	gralloc.sc8830 \
 	camera.sc8830 \
 	camera2.sc8830 \
