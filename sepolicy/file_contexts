@@ -1,3 +1,4 @@
-# Graphics
-/dev/vchiq                                          u:object_r:powervr_device:s0
-/dev/vc-lmk                                         u:object_r:powervr_device:s0
+#############################
+# productinfo files
+#
+/productinfo(/.*)?	u:object_r:prod_file:s0

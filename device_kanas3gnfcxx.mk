@@ -1,66 +1,64 @@
-$(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
+# Copyright (C) 2014 The CyanogenMod Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
-# The gps config appropriate for this device
-$(call inherit-product, device/common/gps/gps_us_supl.mk)
-
-$(call inherit-product-if-exists, vendor/samsung/kanas3gnfcxx/kanas3gnfcxx-vendor.mk)
-
-# Use high-density artwork where available
-PRODUCT_AAPT_CONFIG := normal ldpi mdpi hdpi xhdpi xxhdpi
+LOCAL_PATH := device/samsung/kanas3gnfcxx
 PRODUCT_AAPT_PREF_CONFIG := hdpi
-
-PRODUCT_TAGS += dalvik.gc.type-precise
 
 DEVICE_PACKAGE_OVERLAYS += device/samsung/kanas3gnfcxx/overlay
 
-# Init files
-PRODUCT_COPY_FILES += \
-	device/samsung/kanas3gnfcxx/init.sc8830_ss.rc:root/init.sc8830_ss.rc \
-	device/samsung/kanas3gnfcxx/init.sc8830.usb.rc:root/init.sc8830.usb.rc \
-	device/samsung/kanas3gnfcxx/init.sc8830.rc:root/init.sc8830.rc \
-	device/samsung/kanas3gnfcxx/init.kanas3gnfc.rc:root/init.kanas3gnfc.rc \
-	device/samsung/kanas3gnfcxx/init.environ.rc:root/init.environ.rc \
-	device/samsung/kanas3gnfcxx/init.board.rc:root/init.board.rc \
-	device/samsung/kanas3gnfcxx/init.kanas3gnfc_base.rc:root/init.kanas3gnfc_base.rc \
-	device/samsung/kanas3gnfcxx/init.rc:root/init.rc \
-	device/samsung/kanas3gnfcxx/init.wifi.rc:root/init.wifi.rc \
-	device/samsung/kanas3gnfcxx/modem_control:root/modem_control \
-	device/samsung/kanas3gnfcxx/seapp_contexts:root/seapp_contexts \
-	device/samsung/kanas3gnfcxx/sepolicy:root/sepolicy \
-	device/samsung/kanas3gnfcxx/ueventd.sc8830.rc:root/ueventd.sc8830.rc \
-	device/samsung/kanas3gnfcxx/file_contexts:root/file_contexts \
-	device/samsung/kanas3gnfcxx/property_contexts:root/property_contexts
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
+$(call inherit-product, $(LOCAL_PATH)/device.mk)
 
+# Keylayouts
 PRODUCT_COPY_FILES += \
-	device/samsung/kanas3gnfcxx/media_codecs.xml:system/etc/media_codecs.xml \
-
-# Prebuilt kl keymaps
-PRODUCT_COPY_FILES += \
-	device/samsung/kanas3gnfcxx/bcm_headset.kl:system/usr/keylayout/bcm_headset.kl \
-	device/samsung/kanas3gnfcxx/bcm_keypad_v2.kl:system/usr/keylayout/bcm_keypad_v2.kl \
-	device/samsung/kanas3gnfcxx/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
-	device/samsung/kanas3gnfcxx/samsung-keypad.kl:system/usr/keylayout/samsung-keypad.kl
-
+	$(LOCAL_PATH)/keylayouts/ist30xx_ts_input.kl:system/usr/keylayout/ist30xx_ts_input.kl \
+	$(LOCAL_PATH)/keylayouts/sci-keypad.kl:system/usr/keylayout/sci-keypad.kl
 
 # Filesystem management tools
 PRODUCT_PACKAGES += \
-	setup_fs
+	setup_fs \
+	e2fsck \
+	f2fstat \
+	fsck.f2fs \
+	fibmap.f2fs \
+	mkfs.f2fs
 
-# Usb accessory
-PRODUCT_PACKAGES += \
-	com.android.future.usb.accessory
+# Bluetooth config
+PRODUCT_COPY_FILES += \
+	$(LOCAL_PATH)/configs/bluetooth/bt_did.conf:system/etc/bluetooth/bt_did.conf \
+	$(LOCAL_PATH)/configs/bluetooth/bt_vendor.conf:system/etc/bluetooth/bt_vendor.conf
 
-# graphics modules
+# Bluetooth
 PRODUCT_PACKAGES += \
-	libEGL_mali.so \
-	libGLESv1_CM_mali.so \
-	libGLESv2_mali.so \
-	libMali.so \
-	libboost.so \
-	mali.ko
+	libbluetooth_jni
 
-# video modules
+# HWC
 PRODUCT_PACKAGES += \
+	gralloc.sc8830 \
+	hwcomposer.sc8830 \
+	sprd_gsp.sc8830 \
+	libion \
+	iontest
+
+# Camera
+PRODUCT_PACKAGES += \
+	camera.sc8830 \
+	camera2.sc8830
+
+# Codecs
+PRODUCT_PACKAGES += \
+	libstagefrighthw \
 	libstagefright_sprd_soft_mpeg4dec \
 	libstagefright_sprd_soft_h264dec \
 	libstagefright_sprd_mpeg4dec \
@@ -72,108 +70,95 @@ PRODUCT_PACKAGES += \
 	libstagefright_soft_imaadpcmdec \
 	libstagefright_sprd_aacdec \
 	libstagefright_sprd_mp3dec \
-	libstagefright_sprd_apedec
+	libstagefright_sprd_apedec \
+	libomx_aacdec_sprd.so \
+	libomx_apedec_sprd.so \
+	libomx_avcdec_hw_sprd.so \
+	libomx_avcdec_sw_sprd.so \
+	libomx_avcenc_hw_sprd.so \
+	libomx_m4vh263dec_hw_sprd.so \
+	libomx_m4vh263dec_sw_sprd.so \
+	libomx_m4vh263enc_hw_sprd.so \
+	libomx_mp3dec_sprd.so \
+	libomx_vpxdec_hw_sprd.so
 
-# default audio
+# Lights
 PRODUCT_PACKAGES += \
-	audio.a2dp.default \
-	audio.usb.default \
-	audio.r_submix.default \
-	audio_policy.sc8830 \
-	libaudio-resampler
-
-# sprd HAL modules
-PRODUCT_PACKAGES += \
-	audio.primary.sc8830 \
-	gralloc.sc8830 \
-	camera.sc8830 \
-	camera2.sc8830 \
-	lights.sc8830 \
-	hwcomposer.sc8830 \
-	sprd_gsp.sc8830 \
-	sensors.sc8830
+	lights.sc8830
 
 # Device-specific packages
 PRODUCT_PACKAGES += \
-	SamsungServiceMode \
 	Torch \
+	SamsungServiceMode
 
-# Charger
+# Bluetooth
 PRODUCT_PACKAGES += \
-	charger \
-	charger_res_images
+	bluetooth.default \
+	audio.a2dp.default
 
-# These are the hardware-specific features
+# Audio
+PRODUCT_PACKAGES += \
+	audio.primary.sc8830 \
+	audio_policy.sc8830 \
+	audio.r_submix.default \
+	audio.usb.default \
+	libaudio-resampler
+
+# Wifi
 PRODUCT_COPY_FILES += \
-	frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
-	frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml \
+	$(LOCAL_PATH)/configs/wifi/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
+	$(LOCAL_PATH)/configs/wifi/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf \
+	$(LOCAL_PATH)/configs/wifi/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf
+
+# General config
+PRODUCT_COPY_FILES += \
+	$(LOCAL_PATH)/permissions/platform.xml:system/etc/permissions/platform.xml \
+	$(LOCAL_PATH)/permissions/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
+	$(LOCAL_PATH)/permissions/android.hardware.camera.flash.xml:system/etc/permissions/android.hardware.camera.flash.xml \
+	frameworks/native/data/etc/android.hardware.bluetooth.xml:system/etc/permissions/android.hardware.bluetooth.xml \
+	frameworks/native/data/etc/android.hardware.camera.xml:system/etc/permissions/android.hardware.camera.xml \
 	frameworks/native/data/etc/android.hardware.camera.front.xml:system/etc/permissions/android.hardware.camera.front.xml \
-	frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:system/etc/permissions/android.hardware.camera.flash-autofocus.xml \
-	frameworks/native/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
-	frameworks/native/data/etc/android.hardware.location.xml:system/etc/permissions/android.hardware.location.xml \
 	frameworks/native/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
-	frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
-	frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
 	frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:system/etc/permissions/android.hardware.sensor.accelerometer.xml \
-	frameworks/native/data/etc/android.hardware.sensor.compass.xml:system/etc/permissions/android.hardware.sensor.compass.xml \
-	frameworks/native/data/etc/android.hardware.sensor.gyroscope.xml:system/etc/permissions/android.hardware.sensor.gyroscope.xml \
-	frameworks/native/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
-	frameworks/native/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml \
-	frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml \
-	frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
+	frameworks/native/data/etc/android.hardware.touchscreen.multitouch.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.xml \
+	frameworks/native/data/etc/android.hardware.touchscreen.xml:system/etc/permissions/android.hardware.touchscreen.xml \
+	frameworks/native/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
 	frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
-	packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:system/etc/permissions/android.software.live_wallpaper.xml
+	frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
+	frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml
+
+# Other
+PRODUCT_PACKAGES += \
+	libnetcmdiface
+
+# Set default USB interface
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+	persist.sys.usb.config=mtp
+
+# Device props
+PRODUCT_PROPERTY_OVERRIDES += \
+	keyguard.no_require_sim=true \
+	ro.kernel.android.checkjni=0 \
+	dalvik.vm.checkjni=false
+
+# Something required for dex2oat (ART)
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+	dalvik.vm.dex2oat-Xms=64m \
+	dalvik.vm.dex2oat-Xmx=384m \
+	dalvik.vm.image-dex2oat-Xms=64m \
+	dalvik.vm.image-dex2oat-Xmx=64m
 
 # Support for Browser's saved page feature. This allows
 # for pages saved on previous versions of the OS to be
 # viewed on the current OS.
 PRODUCT_PACKAGES += \
-    libskia_legacy
+	libskia_legacy
 
-# These are the hardware-specific settings that are stored in system properties.
-# Note that the only such settings should be the ones that are too low-level to
-# be reachable from resources or other mechanisms.
-PRODUCT_PROPERTY_OVERRIDES += \
-    wifi.interface=wlan0 \
-    mobiledata.interfaces=rmnet0 \
-    gsm.version.baseband=2030 \
-    rild.libpath=/system/lib/libreference-ril_sp.so \
-    ro.telephony.ril_class=SamsungBCMRIL \
-    ril.subscription.types=NV,RUIM \
-    rild.libargs=-d/dev/smd0 \
-    ro.telephony.call_ring.delay=3000 \
-    ro.telephony.call_ring.multiple=false
-    ro.cm.hardware.cabc=/sys/class/mdnie/mdnie/cabc \
-    ro.telephony.call_ring=0
-
-# enable Google-specific location features,
-# like NetworkLocationProvider and LocationCollector
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.com.google.locationfeatures=1 \
-    ro.com.google.networklocation=1
-
-# Extended JNI checks
-# The extended JNI checks will cause the system to run more slowly, but they can spot a variety of nasty bugs 
-# before they have a chance to cause problems.
-# Default=true for development builds, set by android buildsystem.
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.kernel.android.checkjni=0 \
-    dalvik.vm.checkjni=false
-
-# MTP
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    persist.sys.usb.config=mtp
-
-# Dalvik heap config
-include frameworks/native/build/phone-hdpi-512-dalvik-heap.mk
-
-# we have enough storage space to hold precise GC data
-PRODUCT_TAGS += dalvik.gc.type-precise
-
-$(call inherit-product, hardware/broadcom/wlan/bcmdhd/config/config-bcm.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
-$(call inherit-product, vendor/samsung/kanas3gnfcxx/kanas3gnfcxx-vendor.mk)
 
-PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
+# Set those variables here to overwrite the inherited values.
 PRODUCT_NAME := full_kanas3gnfcxx
 PRODUCT_DEVICE := kanas3gnfcxx
+PRODUCT_BRAND := samsung
+PRODUCT_MANUFACTURER := samsung
+PRODUCT_MODEL := SM-G355HN
