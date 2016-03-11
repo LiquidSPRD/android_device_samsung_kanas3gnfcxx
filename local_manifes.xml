@@ -15,7 +15,7 @@
 <project name="Y300-0100/android_external_tinyalsa" path="external/tinyalsa" remote="github" revision="cm-11.0" />
 <project name="Y300-0100/android_frameworks_av" path="frameworks/av" remote="github" revision="cm-11.0" />
 <project name="Y300-0100/android_device_samsung_kanas3gnfcxx" path="device/samsung/kanas3gnfcxx" remote="github" revision="master" />
-<project name="Y300-0100/android_kernel_samsung_SM-G355HN_XEC" path="kernel/samsung/kanas3gnfcxx" remote="github" revision="master" />
+<project name="Y300-0100/android_kernel_samsung_kanas3gnfcxx" path="kernel/samsung/kanas3gnfcxx" remote="github" revision="master" />
 <project name="Y300-0100/proprietary_vendor_samsung" path="vendor/samsung/kanas3gnfcxx" remote="github" revision="master" />
 <project name="CyanogenMod/android_packages_apps_SamsungServiceMode" path="packages/apps/SamsungServiceMode" remote="github" revision="cm-11.0" />
 </manifest>
