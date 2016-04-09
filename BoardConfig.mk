@@ -1,21 +1,4 @@
-# Copyright (C) 2014 The CyanogenMod Project
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-# http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
-# Inherit from the proprietary version
--include vendor/samsung/kanas3gnfcxx/BoardConfigVendor.mk
-
-# Platform
+# Architecture
 TARGET_ARCH := arm
 TARGET_BOARD_PLATFORM := sc8830
 TARGET_BOARD_PLATFORM_GPU := mali-400 MP
@@ -28,138 +11,54 @@ ARCH_ARM_HAVE_TLS_REGISTER := true
 TARGET_BOOTLOADER_BOARD_NAME := sc7735s
 BOARD_VENDOR := samsung
 
-# Config u-boot
-TARGET_NO_BOOTLOADER := true
+BOARD_KERNEL_CMDLINE := console=ttyS1,115200n8
+BOARD_KERNEL_BASE := 0x00000000
+BOARD_KERNEL_PAGESIZE := 2048
 
+# fix this up by examining /proc/mtd on a running device
 BOARD_BOOTIMAGE_PARTITION_SIZE := 15728640
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 15728640
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 1195376640
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 2457862144
 BOARD_FLASH_BLOCK_SIZE := 131072
-TARGET_USERIMAGES_USE_EXT4 := true
+
+# prebuilt kernel
+TARGET_PREBUILT_KERNEL := device/samsung/kanas3gnfcxx/kernel
+
+# TARGET_KERNEL_CONFIG := kanas3gnfc_hw04_defconfig
+# TARGET_KERNEL_SOURCE := kernel/samsung/kanas3gnfcxx
+
+BOARD_CACHE_DEVICE := /dev/block/mmcblk0p19
+BOARD_CACHE_FILESYSTEM := ext4
+BOARD_CACHE_FILESYSTEM_OPTIONS := rw
+BOARD_SYSTEM_DEVICE := /dev/block/mmcblk0p20
+BOARD_SYSTEM_FILESYSTEM := ext4
+BOARD_SYSTEM_FILESYSTEM_OPTIONS := rw
+BOARD_DATA_DEVICE := /dev/block/mmcblk0p22
+BOARD_DATA_FILESYSTEM := ext4
+BOARD_DATA_FILESYSTEM_OPTIONS := rw
+
+# TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/virtual/android_usb/android0/f_mass_storage/lun0/file
+
+# Recovery
+BOARD_HAS_NO_SELECT_BUTTON := true
+TARGET_RECOVERY_INITRC := device/samsung/kanas3gnfcxx/init.rc
+TARGET_RECOVERY_FSTAB := device/samsung/kanas3gnfcxx/recovery.fstab
 BOARD_HAS_LARGE_FILESYSTEM := true
-
-# RIL
-BOARD_RIL_CLASS := ../../../device/samsung/kanas3gnfcxx/ril
-
-# Bluetooth
-BOARD_HAVE_BLUETOOTH := true
-BOARD_HAVE_BLUETOOTH_BCM := true
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/samsung/kanas3gnfcxx/bluetooth
-BOARD_BLUEDROID_VENDOR_CONF := device/samsung/kanas3gnfcxx/bluetooth/libbt_vndcfg.txt
-#USE_BLUETOOTH_BCM4343 := true
-
-# Connectivity - Wi-Fi
-BOARD_WPA_SUPPLICANT_DRIVER := NL80211
-WPA_SUPPLICANT_VERSION      := VER_0_8_X
-BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_bcmdhd
-BOARD_HOSTAPD_DRIVER        := NL80211
-BOARD_HOSTAPD_PRIVATE_LIB   := lib_driver_cmd_bcmdhd
-BOARD_WLAN_DEVICE           := bcmdhd
-BOARD_WLAN_DEVICE_REV       := bcm4334
-WIFI_DRIVER_FW_PATH_PARAM   := "/sys/module/dhd/parameters/firmware_path"
-WIFI_DRIVER_FW_PATH_STA     := "/system/etc/wifi/bcmdhd_sta.bin"
-WIFI_DRIVER_FW_PATH_AP      := "/system/etc/wifi/bcmdhd_apsta.bin"
-WIFI_DRIVER_MODULE_PATH     := "/system/lib/modules/dhd.ko"
-WIFI_DRIVER_MODULE_NAME     := "dhd"
-WIFI_DRIVER_MODULE_ARG      := "firmware_path=/system/etc/wifi/bcmdhd_sta.bin nvram_path=/system/etc/wifi/nvram_net.txt"
-WIFI_DRIVER_MODULE_AP_ARG   := "firmware_path=/system/etc/wifi/bcmdhd_apsta.bin nvram_path=/system/etc/wifi/nvram_net.txt"
-WIFI_BAND                   := 802_11_ABG
-
-# Wi-Fi Tethering
-BOARD_HAVE_SAMSUNG_WIFI := true
-
-# Hardware rendering
-BOARD_EGL_CFG := device/samsung/kanas3gnfcxx/configs/egl.cfg
-BOARD_USE_MHEAP_SCREENSHOT := true
-BOARD_EGL_WORKAROUND_BUG_10194508 := true
-TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := true
-HWUI_COMPILE_FOR_PERF := true
-USE_SPRD_HWCOMPOSER := true
-USE_OPENGL_RENDERER := true
-USE_OVERLAY_COMPOSER_GPU := true
-DEVICE_FORCE_VIDEO_GO_OVERLAYCOMPOSER := true
-COMMON_GLOBAL_CFLAGS += -DSC8830_HWC
-
-# Resolution
-TARGET_SCREEN_HEIGHT := 800
-TARGET_SCREEN_WIDTH := 480
-
-# Audio
-BOARD_USES_TINYALSA_AUDIO := true
-
-# Board specific features
-#BOARD_USE_VETH := true
-#BOARD_SPRD_RIL := true
-#BOARD_SAMSUNG_RIL := true
-COMMON_GLOBAL_CFLAGS += -DSPRD_HARDWARE
-
-# Camera
-TARGET_BOARD_CAMERA_HAL_VERSION := HAL1.0
-#android zsl capture
-TARGET_BOARD_CAMERA_ANDROID_ZSL_MODE := false
-#back camera rotation capture
-TARGET_BOARD_BACK_CAMERA_ROTATION := false
-#front camera rotation capture
-TARGET_BOARD_FRONT_CAMERA_ROTATION := false
-#rotation capture
-TARGET_BOARD_CAMERA_ROTATION_CAPTURE := false
-# select camera 2M,3M,5M,8M
-CAMERA_SUPPORT_SIZE := 5M
-#
-TARGET_BOARD_NO_FRONT_SENSOR := false
-#
-TARGET_BOARD_CAMERA_FLASH_CTRL := true
-#select camera zsl cap mode
-TARGET_BOARD_CAMERA_CAPTURE_MODE := false
-#face detect
-TARGET_BOARD_CAMERA_FACE_DETECT := false
-#
-TARGET_BOARD_CAMERA_USE_IOMMU := true
-TARGET_BOARD_CAMERA_DMA_COPY := true
-#
-TARGET_BOARD_BACK_CAMERA_INTERFACE := ccir
-TARGET_BOARD_FRONT_CAMERA_INTERFACE := ccir
-#select continuous auto focus
-TARGET_BOARD_CAMERA_CAF := true
-#
-CONFIG_CAMERA_ISP := true
-COMMON_GLOBAL_CFLAGS += -DCONFIG_CAMERA_ISP
-
-# Kernel
-BOARD_KERNEL_BASE := 0x00000000
-BOARD_KERNEL_CMDLINE := console=ttyS1,115200n8 androidboot.selinux=permissive
-BOARD_KERNEL_PAGESIZE := 2048
-TARGET_KERNEL_CONFIG := cm_kanas3gnfc_hw04_defconfig
-TARGET_KERNEL_SOURCE := kernel/samsung/kanas3gnfcxx
-
-# Init
-TARGET_NR_SVC_SUPP_GIDS := 48
-
-# Assert
-TARGET_OTA_ASSERT_DEVICE := kanas3gnfcxx,SM-G355HN
-
-# SELinux
-BOARD_SEPOLICY_DIRS += device/samsung/kanas3gnfcxx/sepolicy
-BOARD_SEPOLICY_UNION :=	\
-	file.te	\
-	file_contexts \
-	seapp_contexts \
-	theme.te \
-	healthd.te \
-	init.te \
-	init_shell.te \
-	installd.te \
-	netd.te \
-	shell.te \
-	system.te \
-	untrusted_app.te \
-	vold.te	\
-	zygote.te
-
-# Enable dex-preoptimization to speed up the first boot sequence
-# WITH_DEXPREOPT := true
-
-
-# CMHW
-BOARD_HARDWARE_CLASS := hardware/samsung/cmhw/ device/samsung/kanas3gnfcxx/cmhw/
+TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
+DEVICE_RESOLUTION := 480x800
+SP1_NAME := "internal_sd"
+SP1_BACKUP_METHOD := files
+SP1_MOUNTABLE := 1
+TW_INTERNAL_STORAGE_PATH := "/data/media/0"
+TW_INTERNAL_STORAGE_MOUNT_POINT := "data"
+TW_EXTERNAL_STORAGE_PATH := "/external_sd"
+TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
+TW_DEFAULT_EXTERNAL_STORAGE := true
+TW_FLASH_FROM_STORAGE := true
+TW_NO_REBOOT_BOOTLOADER := true
+TW_HAS_DOWNLOAD_MODE := true
+TW_MTP_DEVICE := /dev/usb_mtp_gadget
+BOARD_HAS_NO_MISC_PARTITION := true
+BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_10x18.h\"
+RECOVERY_GRAPHICS_USE_LINELENGTH := true

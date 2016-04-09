@@ -1,86 +1,39 @@
-android_device_samsung_core2
-============================
+# twrp_samsung_kanas3gnfcxx
+Device configuration for Samsung Galaxy Core II SM-G355HN For TWRP Only 
+android_device_samsung_kanas3gnfc
+===================================
 
-Device configuration for Samsung Galaxy Core II SM-G355HN
-How to Build
----------------
-install java:
+                       instruction how to build
 
-    sudo add-apt-repository ppa:webupd8team/java
-    sudo apt-get update
-    sudo apt-get install oracle-java6-installer
+I think you already set up build enviroment so I will skip this.
 
-needed packages:
+After you finshed repo sync (cm sources) go in your working dir ../device/
+and create folder /samsung/kanas3gnfc and copy content of kanas3gnfc
+that you downloaded from here.
+Replace (CM) android/bootable/recovery whit this one : https://github.com/omnirom/android_bootable_recovery
 
-    sudo apt-get install lib32z1 git-core gnupg flex bison gperf libsdl1.2-dev libesd0-dev libwxgtk2.8-dev squashfs-tools build-essential lzop zip curl libncurses5-dev zlib1g-dev pngcrush schedtool libxml2 libxml2-utils xsltproc g++-multilib lib32z1-dev lib32ncurses5-dev lib32readline-gplv2-dev gcc-multilib
+Than run comannd in terminal from your working dir
 
-Repo is a tool that makes it easier to work with Git in the context of Android.
+        . build/envsetup.sh
+        lunch omni_kanas3gnfc-userdebug
+        make recoveryimage
 
-To install Repo:
+Your build will start and you will find your recovery. img in
+your working dir ../out/target/product/kanas3gnfc
 
- 
+To make it flashable via ODIN you have to make it recovery.tar.md5
+Navigate with terminal where your recovey.img is.
+For example cd android/out/target/product/kanas3gnfcxx
+where android is name of your working dir
+and run comands:
 
-   Create bin directory in your home directory and that it is included in your path:
+        tar -H ustar -c recovery.img > recovery.tar
+        md5sum -t recovery.tar >> recovery.tar
+        mv recovery.tar recovery.tar.md5
+        
+An now you got recovery.tar.md5 ready to be flashed usin ODIN selected as PDA file
 
-    mkdir ~/bin
-    PATH=~/bin:$PATH
-    
-   Download the Repo tool and ensure that it is executable:
-
-    curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
-    chmod a+x ~/bin/repo
-    
-   Create a directory for your working files:
-
-    mkdir android
-    cd android
-    
-your WORKING_DIRECTORY (android folder)
-
-Run repo init to bring down the latest version of Repo with all its most recent bug fixes. You must specify a URL for the manifest, which specifies where the various repositories included in the Android source will be placed within your working directory.
-
-NOTE:
-.repo is hidden in android folder. To see it hit Ctrl+h in open android folder.
-
-repo init:
-
-    repo init -u https://android.googlesource.com/platform/manifest
-    repo init -u git://github.com/CyanogenMod/android.git -b cm-11.0
-    mkdir .repo/local_manifests
-    
-Copy local_manifests.xml to .repo/local_manifests
-
-Use the following local manifest:
-
-    <?xml version="1.0" encoding="UTF-8"?>
-    <manifest>
-    <remove-project name="CyanogenMod/android_system_core" />
-    <remove-project name="CyanogenMod/android_frameworks_native" />
-    <remove-project name="CyanogenMod/android_frameworks_base" />
-    <remove-project name="CyanogenMod/android_hardware_libhardware_legacy" />
-    <remove-project name="CyanogenMod/android_hardware_libhardware" />
-    <remove-project name="CyanogenMod/android_external_tinyalsa" />
-    <remove-project name="CyanogenMod/android_frameworks_av" />
-    <project name="Y300-0100/android_system_core" path="system/core" remote="github" revision="cm-11.0" />
-    <project name="Y300-0100/android_frameworks_native" path="frameworks/native" remote="github" revision="cm-11.0" />
-    <project name="Y300-0100/android_frameworks_base" path="frameworks/base" remote="github" revision="cm-11.0" />
-    <project name="Y300-0100/android_hardware_libhardware_legacy" path="hardware/libhardware_legacy" remote="github" revision="cm-11.0" />
-    <project name="Y300-0100/android_hardware_libhardware" path="hardware/libhardware" remote="github" revision="cm-11.0" />
-    <project name="Y300-0100/android_external_tinyalsa" path="external/tinyalsa" remote="github" revision="cm-11.0" />
-    <project name="Y300-0100/android_frameworks_av" path="frameworks/av" remote="github" revision="cm-11.0" />
-    <project name="Y300-0100/android_device_samsung_kanas3gnfcxx" path="device/samsung/kanas3gnfcxx" remote="github" revision="master" />
-    <project name="Y300-0100/android_kernel_samsung_kanas3gnfcxx" path="kernel/samsung/kanas3gnfcxx" remote="github" revision="master" />
-    <project name="Y300-0100/proprietary_vendor_samsung" path="vendor/samsung/kanas3gnfcxx" remote="github" revision="master" />
-    <project name="CyanogenMod/android_packages_apps_SamsungServiceMode" path="packages/apps/SamsungServiceMode" remote="github"     revision="cm-11.0" />
-    </manifest>
+Happy building.
 
 
-Sync and build:
 
-    repo sync -j4
-    vendor/cm/get-prebuilts
-    lunch
-    select number userdebug
-    make bootimage && brunch kanas3gnfcxx
-
-Not tested yet and proprietary files are not ordered right.
