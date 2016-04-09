@@ -49,22 +49,24 @@ BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/samsung/kanas3gnfcxx/bluet
 BOARD_BLUEDROID_VENDOR_CONF := device/samsung/kanas3gnfcxx/bluetooth/libbt_vndcfg.txt
 #USE_BLUETOOTH_BCM4343 := true
 
-# Wifi
-BOARD_WLAN_DEVICE := bcmdhd
-BOARD_WLAN_DEVICE_REV := bcm4343
-WPA_SUPPLICANT_VERSION := VER_0_8_X
+# Connectivity - Wi-Fi
 BOARD_WPA_SUPPLICANT_DRIVER := NL80211
+WPA_SUPPLICANT_VERSION      := VER_0_8_X
 BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_bcmdhd
-BOARD_HOSTAPD_DRIVER := NL80211
-BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_bcmdhd
-WIFI_DRIVER_FW_PATH_PARAM := "/sys/module/dhd/parameters/firmware_path"
-WIFI_DRIVER_FW_PATH_STA := "/system/etc/wifi/bcmdhd_sta.bin"
-WIFI_DRIVER_FW_PATH_AP := "/system/etc/wifi/bcmdhd_apsta.bin"
-WIFI_DRIVER_NVRAM_PATH_PARAM := "/sys/module/dhd/parameters/nvram_path"
-WIFI_DRIVER_NVRAM_PATH := "/system/etc/wifi/nvram_net.txt"
-WIFI_BAND := 802_11_ABG
-FwPatchFilePath=/vendor/firmware/
-FwPatchFileName=BCM4330B1_002.001.003.1025.1303.hcd
+BOARD_HOSTAPD_DRIVER        := NL80211
+BOARD_HOSTAPD_PRIVATE_LIB   := lib_driver_cmd_bcmdhd
+BOARD_WLAN_DEVICE           := bcmdhd
+BOARD_WLAN_DEVICE_REV       := bcm4334
+WIFI_DRIVER_FW_PATH_PARAM   := "/sys/module/dhd/parameters/firmware_path"
+WIFI_DRIVER_FW_PATH_STA     := "/system/etc/wifi/bcmdhd_sta.bin"
+WIFI_DRIVER_FW_PATH_AP      := "/system/etc/wifi/bcmdhd_apsta.bin"
+WIFI_DRIVER_MODULE_PATH     := "/system/lib/modules/dhd.ko"
+WIFI_DRIVER_MODULE_NAME     := "dhd"
+WIFI_DRIVER_MODULE_ARG      := "firmware_path=/system/etc/wifi/bcmdhd_sta.bin nvram_path=/system/etc/wifi/nvram_net.txt"
+WIFI_DRIVER_MODULE_AP_ARG   := "firmware_path=/system/etc/wifi/bcmdhd_apsta.bin nvram_path=/system/etc/wifi/nvram_net.txt"
+WIFI_BAND                   := 802_11_ABG
+
+# Wi-Fi Tethering
 BOARD_HAVE_SAMSUNG_WIFI := true
 
 # Hardware rendering
@@ -161,27 +163,3 @@ BOARD_SEPOLICY_UNION :=	\
 
 # CMHW
 BOARD_HARDWARE_CLASS := hardware/samsung/cmhw/ device/samsung/kanas3gnfcxx/cmhw/
-
-# Recovery
-BOARD_HAS_NO_SELECT_BUTTON := true
-BOARD_HAS_NO_REAL_SDCARD := true
-BOARD_HAS_NO_SELECT_BUTTON := true
-TARGET_RECOVERY_INITRC := device/samsung/kanas3gnfcxx/etc/init.rc
-TARGET_RECOVERY_FSTAB := device/samsung/kanas3gnfcxx/recovery.fstab
-BOARD_HAS_LARGE_FILESYSTEM := true
-TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
-DEVICE_RESOLUTION := 480x800
-SP1_NAME := "internal_sd"
-SP1_BACKUP_METHOD := files
-SP1_MOUNTABLE := 1
-TW_INTERNAL_STORAGE_PATH := "/data/media/0"
-TW_INTERNAL_STORAGE_MOUNT_POINT := "data"
-TW_EXTERNAL_STORAGE_PATH := "/external_sd"
-TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
-TW_DEFAULT_EXTERNAL_STORAGE := true
-TW_FLASH_FROM_STORAGE := true
-TW_NO_REBOOT_BOOTLOADER := true
-TW_MTP_DEVICE := /dev/usb_mtp_gadget
-BOARD_HAS_NO_MISC_PARTITION := true
-BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_10x18.h\"
-RECOVERY_GRAPHICS_USE_LINELENGTH := true
