@@ -131,10 +131,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
 	libnetcmdiface
 
-# Other
-PRODUCT_PACKAGES += \
-	wpa_supplicant
-
 # Set default USB interface
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 	persist.sys.usb.config=mtp
