@@ -83,4 +83,5 @@ Sync and build:
     select number userdebug
     make bootimage && brunch kanas3gnfcxx
 
-Not tested yet and proprietary files are not ordered right.
+WORKING 
+But wifi issue stands
