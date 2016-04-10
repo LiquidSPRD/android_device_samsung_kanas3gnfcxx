@@ -39,8 +39,13 @@ BOARD_FLASH_BLOCK_SIZE := 131072
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_HAS_LARGE_FILESYSTEM := true
 
+# something
+BOARD_NEEDS_MEMORYHEAPION_SPRD := true
+COMMON_GLOBAL_CFLAGS += -DSPRD_HARDWARE
+
 # RIL
 BOARD_RIL_CLASS := ../../../device/samsung/kanas3gnfcxx/ril
+COMMON_GLOBAL_CFLAGS += -DSEC_PRODUCT_FEATURE_RIL_CALL_DUALMODE_CDMAGSM
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
@@ -49,27 +54,26 @@ BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/samsung/kanas3gnfcxx/bluet
 BOARD_BLUEDROID_VENDOR_CONF := device/samsung/kanas3gnfcxx/bluetooth/libbt_vndcfg.txt
 #USE_BLUETOOTH_BCM4343 := true
 
-# Connectivity - Wi-Fi
-BOARD_WPA_SUPPLICANT_DRIVER := NL80211
-WPA_SUPPLICANT_VERSION      := VER_0_8_X
-BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_bcmdhd
-BOARD_HOSTAPD_DRIVER        := NL80211
-BOARD_HOSTAPD_PRIVATE_LIB   := lib_driver_cmd_bcmdhd
-BOARD_WLAN_DEVICE           := bcmdhd
-BOARD_WLAN_DEVICE_REV       := bcm4334
-WIFI_DRIVER_FW_PATH_PARAM   := "/sys/module/dhd/parameters/firmware_path"
-WIFI_DRIVER_FW_PATH_STA     := "/system/etc/wifi/bcmdhd_sta.bin"
-WIFI_DRIVER_FW_PATH_AP      := "/system/etc/wifi/bcmdhd_apsta.bin"
-WIFI_DRIVER_MODULE_PATH     := "/system/lib/modules/dhd.ko"
-WIFI_DRIVER_MODULE_NAME     := "dhd"
-WIFI_DRIVER_MODULE_ARG      := "firmware_path=/system/etc/wifi/bcmdhd_sta.bin nvram_path=/system/etc/wifi/nvram_net.txt"
-WIFI_DRIVER_MODULE_AP_ARG   := "firmware_path=/system/etc/wifi/bcmdhd_apsta.bin nvram_path=/system/etc/wifi/nvram_net.txt"
-WIFI_BAND                   := 802_11_ABG
+TARGET_CUSTOM_WIFI := ../../device/kanas3gnfcxx/wifi/wifi.c
 
-# Wi-Fi Tethering
+# Wifi
+BOARD_WLAN_DEVICE := bcmdhd
+BOARD_WLAN_DEVICE_REV := bcm4343
+WPA_SUPPLICANT_VERSION := VER_0_8_X
+BOARD_WPA_SUPPLICANT_DRIVER := NL80211
+BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_bcmdhd
+BOARD_HOSTAPD_DRIVER := NL80211
+BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_bcmdhd
+WIFI_DRIVER_FW_PATH_PARAM := "/sys/module/dhd/parameters/firmware_path"
+WIFI_DRIVER_FW_PATH_STA := "/system/etc/wifi/bcmdhd_sta.bin"
+WIFI_DRIVER_FW_PATH_AP := "/system/etc/wifi/bcmdhd_apsta.bin"
+WIFI_DRIVER_NVRAM_PATH_PARAM := "/sys/module/dhd/parameters/nvram_path"
+WIFI_DRIVER_NVRAM_PATH := "/system/etc/wifi/nvram_net.txt"
+WIFI_BAND := 802_11_ABG
 BOARD_HAVE_SAMSUNG_WIFI := true
 
 # Hardware rendering
+TARGET_BOARD_PLATFORM_GPU := ARM Mali-400
 BOARD_EGL_CFG := device/samsung/kanas3gnfcxx/configs/egl.cfg
 BOARD_USE_MHEAP_SCREENSHOT := true
 BOARD_EGL_WORKAROUND_BUG_10194508 := true
@@ -87,12 +91,14 @@ TARGET_SCREEN_WIDTH := 480
 
 # Audio
 BOARD_USES_TINYALSA_AUDIO := true
+BOARD_USES_SS_VOIP := true
+BOARD_USE_LIBATCHANNEL_WRAPPER := true
 
 # Board specific features
 #BOARD_USE_VETH := true
 #BOARD_SPRD_RIL := true
 #BOARD_SAMSUNG_RIL := true
-COMMON_GLOBAL_CFLAGS += -DSPRD_HARDWARE
+#COMMON_GLOBAL_CFLAGS += -DSPRD_HARDWARE
 
 # Camera
 TARGET_BOARD_CAMERA_HAL_VERSION := HAL1.0
@@ -137,7 +143,7 @@ TARGET_KERNEL_SOURCE := kernel/samsung/kanas3gnfcxx
 TARGET_NR_SVC_SUPP_GIDS := 48
 
 # Assert
-TARGET_OTA_ASSERT_DEVICE := kanas3gnfcxx,SM-G355HN
+TARGET_OTA_ASSERT_DEVICE := kanas3gnfc,SM-G355HN,kanas3gnfcxx,SM-G355HN
 
 # SELinux
 BOARD_SEPOLICY_DIRS += device/samsung/kanas3gnfcxx/sepolicy
@@ -163,3 +169,4 @@ BOARD_SEPOLICY_UNION :=	\
 
 # CMHW
 BOARD_HARDWARE_CLASS := hardware/samsung/cmhw/ device/samsung/kanas3gnfcxx/cmhw/
+

@@ -37,6 +37,7 @@ PRODUCT_COPY_FILES += \
 	device/samsung/kanas3gnfcxx/rootdir/init.board.rc:root/init.board.rc \
 	device/samsung/kanas3gnfcxx/rootdir/init.kanas3gnfc_base.rc:root/init.kanas3gnfc_base.rc \
 	device/samsung/kanas3gnfcxx/rootdir/init.rc:root/init.rc \
+	device/samsung/kanas3gnfcxx/rootdir/init.usb.rc:root/init.usb.rc \
 	device/samsung/kanas3gnfcxx/rootdir/init.wifi.rc:root/init.wifi.rc \
 	device/samsung/kanas3gnfcxx/rootdir/seapp_contexts:root/seapp_contexts \
 	device/samsung/kanas3gnfcxx/rootdir/sepolicy:root/sepolicy \
