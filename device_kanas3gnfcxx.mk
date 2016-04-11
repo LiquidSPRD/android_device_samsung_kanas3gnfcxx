@@ -103,12 +103,11 @@ PRODUCT_PACKAGES += \
 	audio.r_submix.default \
 	audio.usb.default \
 	libaudio-resampler
-
-# Wifi
+	
+ +#WiFi
 PRODUCT_COPY_FILES += \
-	$(LOCAL_PATH)/configs/wifi/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
-	$(LOCAL_PATH)/configs/wifi/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf \
-	$(LOCAL_PATH)/configs/wifi/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf
+       $(LOCAL_PATH)/wifi/nvram_mfg.txt:system/etc/wifi/nvram_mfg.txt \
+       $(LOCAL_PATH)/wifi/nvram_net.txt:system/etc/wifi/nvram_net.txt	
 
 # General config
 PRODUCT_COPY_FILES += \
