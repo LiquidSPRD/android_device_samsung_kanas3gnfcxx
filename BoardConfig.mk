@@ -54,25 +54,21 @@ BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/samsung/kanas3gnfcxx/bluet
 BOARD_BLUEDROID_VENDOR_CONF := device/samsung/kanas3gnfcxx/bluetooth/libbt_vndcfg.txt
 #USE_BLUETOOTH_BCM4343 := true
 
-TARGET_CUSTOM_WIFI := ../../device/kanas3gnfcxx/wifi/wifi.c
-
-# Connectivity - Wi-Fi
+# Wifi
+BOARD_WLAN_DEVICE := bcmdhd
+BOARD_WLAN_DEVICE_REV := bcm4330
+WPA_SUPPLICANT_VERSION := VER_0_8_X
 BOARD_WPA_SUPPLICANT_DRIVER := NL80211
-WPA_SUPPLICANT_VERSION      := VER_0_8_X
 BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_bcmdhd
-BOARD_HOSTAPD_DRIVER        := NL80211
-BOARD_HOSTAPD_PRIVATE_LIB   := lib_driver_cmd_bcmdhd
-BOARD_WLAN_DEVICE           := bcmdhd
-BOARD_WLAN_DEVICE_REV       := bcm4330
-WIFI_DRIVER_FW_PATH_PARAM   := "/sys/module/dhd/parameters/firmware_path"
-WIFI_DRIVER_FW_PATH_STA     := "/system/etc/wifi/bcmdhd_sta.bin"
-WIFI_DRIVER_FW_PATH_AP      := "/system/etc/wifi/bcmdhd_apsta.bin"
-WIFI_DRIVER_FW_PATH_P2P     := "/system/etc/wifi/bcmdhd_p2p.bin"
-WIFI_DRIVER_MODULE_PATH     := "/system/lib/modules/dhd.ko"
-WIFI_DRIVER_MODULE_NAME     := "dhd"
-WIFI_DRIVER_MODULE_ARG      := "firmware_path=/system/etc/wifi/bcmdhd_sta.bin nvram_path=/system/etc/wifi/nvram_net.txt"
-WIFI_DRIVER_MODULE_AP_ARG   := "firmware_path=/system/etc/wifi/bcmdhd_apsta.bin nvram_path=/system/etc/wifi/nvram_net.txt"
-WIFI_BAND                   := 802_11_ABG
+BOARD_HOSTAPD_DRIVER := NL80211
+BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_bcmdhd
+WIFI_DRIVER_FW_PATH_PARAM := "/sys/module/dhd/parameters/firmware_path"
+WIFI_DRIVER_FW_PATH_STA := "/system/etc/wifi/bcmdhd_sta.bin"
+WIFI_DRIVER_FW_PATH_AP := "/system/etc/wifi/bcmdhd_apsta.bin"
+WIFI_DRIVER_NVRAM_PATH_PARAM := "/sys/module/dhd/parameters/nvram_path"
+WIFI_DRIVER_NVRAM_PATH := "/system/etc/wifi/nvram_net.txt"
+WIFI_BAND := 802_11_ABG
+BOARD_HAVE_SAMSUNG_WIFI := true
 
 # Hardware rendering
 TARGET_BOARD_PLATFORM_GPU := ARM Mali-400

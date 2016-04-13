@@ -31,7 +31,7 @@
 #include <netlink/genl/ctrl.h>
 #include <netlink/msg.h>
 #include <netlink/attr.h>
-#include <nl80211.h>
+#include "nl80211.h"
 #endif
 
 #include "hardware_legacy/wifi.h"
@@ -133,6 +133,8 @@ static const char P2P_CONFIG_FILE[]     = "/data/misc/wifi/p2p_supplicant.conf";
 static const char CONTROL_IFACE_PATH[]  = "/data/misc/wifi/sockets";
 static const char MODULE_FILE[]         = "/proc/modules";
 
+static const char DRIVER_PROP_PARAM[] = "wlan.driver.arg";
+
 static const char IFNAME[]              = "IFNAME=";
 #define IFNAMELEN			(sizeof(IFNAME) - 1)
 static const char WPA_EVENT_IGNORE[]    = "CTRL-EVENT-IGNORE ";
@@ -154,13 +156,10 @@ char* get_samsung_wifi_type()
 {
     char buf[10];
     int fd = open("/data/.cid.info", O_RDONLY);
-    if (fd < 0) {
-        ALOGE("Failed to open /data/.cid.info: %s\n", strerror(errno));
+    if (fd < 0)
         return NULL;
-    }
 
     if (read(fd, buf, sizeof(buf)) < 0) {
-        ALOGE("Failed to read /data/.cid.info: %s\n", strerror(errno));
         close(fd);
         return NULL;
     }
@@ -175,14 +174,6 @@ char* get_samsung_wifi_type()
 
     if (strncmp(buf, "semcosh", 7) == 0)
         return "_semcosh";
-
-    if (strncmp(buf, "semco3rd", 8) == 0)
-        return "_semco3rd";
-
-    if (strncmp(buf, "wisol", 5) == 0)
-        return "_wisol";
-
-    ALOGI("Unknown wifi type found in /data/.cid.info\n");
 
     return NULL;
 }
@@ -288,6 +279,8 @@ int wifi_load_driver()
 #ifdef WIFI_DRIVER_MODULE_PATH
     char driver_status[PROPERTY_VALUE_MAX];
     int count = 100; /* wait at most 20 seconds for completion */
+    char module_arg[256];
+    char module_param[PROPERTY_VALUE_MAX];
     char module_arg2[256];
 #ifdef SAMSUNG_WIFI
     char* type = get_samsung_wifi_type();
@@ -309,7 +302,10 @@ int wifi_load_driver()
     usleep(200000);
 #endif
 
-    if (insmod(DRIVER_MODULE_PATH, DRIVER_MODULE_ARG) < 0) {
+    property_get(DRIVER_PROP_PARAM, module_param, NULL);
+    sprintf(module_arg, "%s %s", DRIVER_MODULE_ARG, module_param);
+
+    if (insmod(DRIVER_MODULE_PATH, module_arg) < 0) {
 #endif
 
 #ifdef WIFI_EXT_MODULE_NAME
@@ -332,7 +328,7 @@ int wifi_load_driver()
         if (property_get(DRIVER_PROP_NAME, driver_status, NULL)) {
             if (strcmp(driver_status, "ok") == 0)
                 return 0;
-            else if (strcmp(driver_status, "failed") == 0) {
+            else if (strcmp(DRIVER_PROP_NAME, "failed") == 0) {
                 wifi_unload_driver();
                 return -1;
             }
@@ -809,7 +805,7 @@ int wifi_start_supplicant(int p2p_supported)
     }
 
     /* Check whether already running */
-    if (property_get(supplicant_prop_name, supp_status, NULL)
+    if (property_get(supplicant_name, supp_status, NULL)
             && strcmp(supp_status, "running") == 0) {
         return 0;
     }
@@ -850,6 +846,16 @@ int wifi_start_supplicant(int p2p_supported)
         serial = __system_property_serial(pi);
     }
 #endif
+
+#ifdef WIFI_DRIVER_MODULE_PATH
+    /* The ar6k driver needs the interface up in order to scan! */
+    if (!strncmp(DRIVER_MODULE_NAME, "ar6000", 6)) {
+        ifc_init();
+        ifc_up("eth0");
+        sleep(2);
+    }
+#endif
+
     property_get("wifi.interface", primary_iface, WIFI_TEST_INTERFACE);
 
     property_set("ctl.start", supplicant_name);
@@ -898,13 +904,6 @@ int wifi_stop_supplicant(int p2p_supported)
         && strcmp(supp_status, "stopped") == 0) {
         return 0;
     }
-
-#ifdef USES_TI_MAC80211
-    if (p2p_supported && add_remove_p2p_interface(0) < 0) {
-        ALOGE("Wi-Fi - could not remove p2p interface");
-        return -1;
-    }
-#endif
 
     property_set("ctl.stop", supplicant_name);
     sched_yield();
@@ -1177,3 +1176,4 @@ int wifi_set_mode(int mode) {
     wifi_mode = mode;
     return 0;
 }
+
