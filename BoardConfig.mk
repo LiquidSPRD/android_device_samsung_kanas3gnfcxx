@@ -166,5 +166,4 @@ BOARD_SEPOLICY_UNION :=	\
 
 
 # CMHW
-BOARD_HARDWARE_CLASS := hardware/samsung/cmhw/ device/samsung/kanas3gnfcxx/cmhw/
-
+BOARD_HARDWARE_CLASS := device/samsung/kanas3gnfcxx/cmhw/
