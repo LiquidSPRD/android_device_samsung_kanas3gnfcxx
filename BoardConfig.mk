@@ -159,7 +159,8 @@ BOARD_SEPOLICY_UNION :=	\
 	system.te \
 	untrusted_app.te \
 	vold.te	\
-	zygote.te
+	zygote.te \
+	mac_permissions.xml
 
 # Enable dex-preoptimization to speed up the first boot sequence
 # WITH_DEXPREOPT := true
@@ -167,3 +168,6 @@ BOARD_SEPOLICY_UNION :=	\
 
 # CMHW
 BOARD_HARDWARE_CLASS := device/samsung/kanas3gnfcxx/cmhw/
+
+# NFC
+BOARD_HAVE_NFC := true

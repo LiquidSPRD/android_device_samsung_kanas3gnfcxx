@@ -95,6 +95,14 @@ PRODUCT_PACKAGES += \
 	bluetooth.default \
 	audio.a2dp.default
 
+# NFC
+PRODUCT_PACKAGES += \
+	libnfc_nci \
+	NfcNci \
+        Nfc \
+        Tag \
+        com.android.nfc_extras
+
 # Audio
 PRODUCT_PACKAGES += \
 	audio.primary.sc8830 \
@@ -114,6 +122,10 @@ PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/permissions/platform.xml:system/etc/permissions/platform.xml \
 	$(LOCAL_PATH)/permissions/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
 	$(LOCAL_PATH)/permissions/android.hardware.camera.flash.xml:system/etc/permissions/android.hardware.camera.flash.xml \
+	$(LOCAL_PATH)/permissions/android.hardware.nfc.hce.xml:system/etc/permissions/android.hardware.nfc.hce.xml \
+	$(LOCAL_PATH)/permissions/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml \
+	$(LOCAL_PATH)/permissions/com.android.nfc_extras.xml:system/etc/permissions/com.android.nfc_extras.xml \
+	$(LOCAL_PATH)/permissions/com.broadcom.nfc.xml:system/etc/permissions/com.broadcom.nfc.xml \
 	frameworks/native/data/etc/android.hardware.bluetooth.xml:system/etc/permissions/android.hardware.bluetooth.xml \
 	frameworks/native/data/etc/android.hardware.camera.xml:system/etc/permissions/android.hardware.camera.xml \
 	frameworks/native/data/etc/android.hardware.camera.front.xml:system/etc/permissions/android.hardware.camera.front.xml \
@@ -153,6 +165,7 @@ PRODUCT_PACKAGES += \
 	libskia_legacy
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
+$(call inherit-product, vendor/cm/config/nfc_enhanced.mk)
 
 # Set those variables here to overwrite the inherited values.
 PRODUCT_NAME := full_kanas3gnfcxx
