@@ -19,6 +19,7 @@ DEVICE_PACKAGE_OVERLAYS += device/samsung/kanas3gnfcxx/overlay
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 $(call inherit-product, $(LOCAL_PATH)/device.mk)
+$(call inherit-product, device/common/gps/gps_us_supl.mk)
 
 # Keylayouts
 PRODUCT_COPY_FILES += \
@@ -88,6 +89,7 @@ PRODUCT_PACKAGES += \
 
 # Device-specific packages
 PRODUCT_PACKAGES += \
+	Torch \
 	SamsungServiceMode
 
 # Bluetooth
@@ -109,7 +111,11 @@ PRODUCT_PACKAGES += \
 	audio_policy.sc8830 \
 	audio.r_submix.default \
 	audio.usb.default \
-	libaudio-resampler
+	audio_vbc_eq \
+	libaudio-resampler \
+	libatchannel \
+	libatchannel_wrapper \
+	libtinyalsa
 
 # Wifi
 PRODUCT_COPY_FILES += \
