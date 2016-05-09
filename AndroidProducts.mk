@@ -18,4 +18,4 @@
 #
 
 PRODUCT_MAKEFILES := \
-	$(LOCAL_DIR)/device_kanas3gnfcxx.mk
+	$(LOCAL_DIR)/full_kanas3gnfcxx.mk
