@@ -11,7 +11,7 @@ PRODUCT_BUILD_PROP_OVERRIDES += \
     PRODUCT_MODEL=SM-G355HN \
     PRODUCT_NAME=kanas3gnfcxx \
     PRODUCT_DEVICE=kanas3gnfcxx \
-    TARGET_DEVICE=klimtwifi \
+    TARGET_DEVICE=kanas3gnfcxx \
 
 ## Device identifier. This must come after all inclusions
 PRODUCT_MANUFACTURER := samsung
