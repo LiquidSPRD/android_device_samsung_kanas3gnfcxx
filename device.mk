@@ -171,6 +171,3 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 # viewed on the current OS.
 PRODUCT_PACKAGES += \
 	libskia_legacy
-
-$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
-$(call inherit-product, vendor/cm/config/nfc_enhanced.mk)
