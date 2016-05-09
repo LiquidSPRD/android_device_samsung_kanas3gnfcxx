@@ -1,5 +1,5 @@
 # Inherit device configuration
-$(call inherit-product, $(LOCAL_PATH)/full_kanas3gnfcxx.mk)
+$(call inherit-product, device/samsung/kanas3gnfcxx/full_kanas3gnfcxx.mk)
 
 # Inherit some common Liquid stuff.
 $(call inherit-product, vendor/liquid/config/common_phone.mk)
