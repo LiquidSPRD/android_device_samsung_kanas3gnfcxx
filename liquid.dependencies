@@ -1,21 +1,14 @@
 [
     {
-        "remote": "gh",
-        "repository": "LiquidSPRD/android_device_samsung_kanas3gnfcxx",
-        "target_path": "device/samsung/kanas3gnfcxx",
-        "revision": "lp5.1"
-    },
-    {
-        "remote": "gh",
+        "remote": "github",
         "repository": "LiquidSPRD/android_kernel_samsung_kanas3gnfcxx",
         "target_path": "kernel/samsung/kanas3gnfcxx",
         "revision": "lp5.1"
     },
     {
-        "remote": "gh",
+        "remote": "github",
         "repository": "LiquidSPRD/proprietary_vendor_samsung"",
         "target_path": "vendor/samsung/kanas3gnfcxx",
         "revision": "lp5.1"
     }
 ]
-
