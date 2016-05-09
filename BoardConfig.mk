@@ -144,8 +144,8 @@ TARGET_NR_SVC_SUPP_GIDS := 48
 TARGET_OTA_ASSERT_DEVICE := kanas3gnfc,SM-G355HN,kanas3gnfcxx,SM-G355HN
 
 # SELinux
-BOARD_SEPOLICY_DIRS += device/samsung/kanas3gnfcxx/sepolicy
-BOARD_SEPOLICY_UNION :=	\
+# BOARD_SEPOLICY_DIRS += device/samsung/kanas3gnfcxx/sepolicy
+# BOARD_SEPOLICY_UNION :=	\
 	file.te	\
 	file_contexts \
 	seapp_contexts \
@@ -171,3 +171,5 @@ BOARD_HARDWARE_CLASS := device/samsung/kanas3gnfcxx/cmhw/
 
 # NFC
 BOARD_HAVE_NFC := true
+
+TW_THEME  := landscape_hdpi
