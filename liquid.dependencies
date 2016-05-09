@@ -1,13 +1,13 @@
 [
     {
         "remote": "gh",
-        "repository": "LiquidSPRD/android_kernel_samsung_kanas3gnfcxx",
+        "repository": "android_kernel_samsung_kanas3gnfcxx",
         "target_path": "kernel/samsung/kanas3gnfcxx",
         "revision": "5.1"
     },
     {
         "remote": "gh",
-        "repository": "LiquidSPRD/proprietary_vendor_samsung"",
+        "repository": "proprietary_vendor_samsung"",
         "target_path": "vendor/samsung/kanas3gnfcxx",
         "revision": "5.1"
     }
