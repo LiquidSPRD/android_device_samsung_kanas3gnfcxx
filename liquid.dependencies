@@ -1,12 +1,18 @@
 [
     {
-        "remote": "lsprd",
+        "remote": "gh",
+        "repository": "android_device_samsung_kanas3gnfcxx",
+        "target_path": "device/samsung/kanas3gnfcxx",
+        "revision": "5.1"
+    },
+        {
+        "remote": "gh",
         "repository": "android_kernel_samsung_kanas3gnfcxx",
         "target_path": "kernel/samsung/kanas3gnfcxx",
         "revision": "5.1"
     },
     {
-        "remote": "lsprd",
+        "remote": "gh",
         "repository": "proprietary_vendor_samsung"",
         "target_path": "vendor/samsung/kanas3gnfcxx",
         "revision": "5.1"
