@@ -20,7 +20,6 @@ PRODUCT_AAPT_PREF_CONFIG := hdpi
 
 DEVICE_PACKAGE_OVERLAYS += device/samsung/kanas3gnfcxx/overlay
 
-$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 $(call inherit-product, device/samsung/kanas3gnfcxx/device.mk)
 $(call inherit-product, device/common/gps/gps_us_supl.mk)
 
