@@ -13,6 +13,9 @@
 # limitations under the License.
 
 LOCAL_PATH := device/samsung/kanas3gnfcxx
+
+# Device uses high-density artwork where available
+PRODUCT_AAPT_CONFIG := normal hdpi xhdpi xxhdpi xxxhdpi tvdpi mdpi ldpi
 PRODUCT_AAPT_PREF_CONFIG := hdpi
 
 DEVICE_PACKAGE_OVERLAYS += device/samsung/kanas3gnfcxx/overlay
