@@ -146,21 +146,21 @@ TARGET_OTA_ASSERT_DEVICE := kanas3gnfc,SM-G355HN,kanas3gnfcxx,SM-G355HN
 # SELinux
 # BOARD_SEPOLICY_DIRS += device/samsung/kanas3gnfcxx/sepolicy
 # BOARD_SEPOLICY_UNION :=	\
-	file.te	\
-	file_contexts \
-	seapp_contexts \
-	theme.te \
-	healthd.te \
-	init.te \
-	init_shell.te \
-	installd.te \
-	netd.te \
-	shell.te \
-	system.te \
-	untrusted_app.te \
-	vold.te	\
-	zygote.te \
-	mac_permissions.xml
+#	file.te	\
+#	file_contexts \
+#	seapp_contexts \
+#	theme.te \
+#	healthd.te \
+#	init.te \
+#	init_shell.te \
+#	installd.te \
+#	netd.te \
+#	shell.te \
+#	system.te \
+#	untrusted_app.te \
+#	vold.te	\
+#	zygote.te \
+#	mac_permissions.xml
 
 # Enable dex-preoptimization to speed up the first boot sequence
 # WITH_DEXPREOPT := true
