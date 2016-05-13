@@ -1,11 +1,10 @@
-# Copyright (C) 2013 The Android Open Source Project
-# Copyright (C) 2013 The CyanogenMod Project
+# Copyright (C) 2016 The CyanogenMod Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#      http://www.apache.org/licenses/LICENSE-2.0
+# http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,8 +14,29 @@
 
 LOCAL_PATH := $(call my-dir)
 
+ifeq ($(BOARD_USE_LIBATCHANNEL_WRAPPER),true)
+
 include $(CLEAR_VARS)
-LOCAL_SRC_FILES := healthd-kanas3gnfcxx.sc8830.cpp
-LOCAL_MODULE := libhealthd-kanas3gnfcxx.sc8830
-LOCAL_C_INCLUDES := system/core/healthd
-include $(BUILD_STATIC_LIBRARY)
+
+LOCAL_MODULE := libatchannel_wrapper
+
+LOCAL_MODULE_TAGS := optional
+
+LOCAL_MODULE_PATH := \
+	$(TARGET_OUT_SHARED_LIBRARIES)
+
+LOCAL_SRC_FILES := \
+	AtChannelWrapper.cpp
+
+LOCAL_SHARED_LIBRARIES := \
+	libcutils \
+	libbinder \
+	libutils \
+	libdl
+
+LOCAL_EXPORT_C_INCLUDE_DIRS := \
+	$(LOCAL_PATH)
+
+include $(BUILD_SHARED_LIBRARY)
+
+endif # BOARD_USE_LIBATCHANNEL_WRAPPER

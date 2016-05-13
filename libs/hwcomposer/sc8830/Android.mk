@@ -21,7 +21,7 @@ LOCAL_PATH:= $(call my-dir)
 ifeq ($(strip $(TARGET_BOARD_PLATFORM)),sc8830)
 DEVICE_WITH_GSP := true
 endif
-ifeq ($(strip $(TARGET_BOARD_PLATFORM)),sc7735s)
+ifeq ($(strip $(TARGET_BOARD_PLATFORM)),scx15)
 DEVICE_WITH_GSP := true
 endif
 

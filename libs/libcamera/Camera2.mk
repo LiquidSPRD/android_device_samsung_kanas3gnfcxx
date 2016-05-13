@@ -7,7 +7,7 @@ ifeq ($(strip $(TARGET_BOARD_PLATFORM)),sc8830)
 sc8830like=1
 endif
 
-ifeq ($(strip $(TARGET_BOARD_PLATFORM)),sc7735s)
+ifeq ($(strip $(TARGET_BOARD_PLATFORM)),scx15)
 sc8830like=1
 endif
 
@@ -28,6 +28,7 @@ LOCAL_C_INCLUDES := \
 	system/media/camera/include \
 	$(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/source/include/video \
 	$(LOCAL_PATH)/../gralloc \
+	$(LOCAL_PATH)/../kernel-headers/arch-arm
 
 LOCAL_SRC_FILES:= \
 	sc8830/src/SprdOEMCamera.c \
@@ -113,7 +114,7 @@ endif
 LOCAL_MODULE_PATH := $(TARGET_OUT_SHARED_LIBRARIES)/hw
 LOCAL_CFLAGS := -fno-strict-aliasing -D_VSP_ -DJPEG_ENC -D_VSP_LINUX_ -DCHIP_ENDIAN_LITTLE -DCONFIG_CAMERA_2M  -DANDROID_4100
 
-ifeq ($(strip $(TARGET_BOARD_PLATFORM)),sc7735s)
+ifeq ($(strip $(TARGET_BOARD_PLATFORM)),scx15)
 LOCAL_CFLAGS += -DCONFIG_CAMERA_SMALL_PREVSIZE
 endif
 

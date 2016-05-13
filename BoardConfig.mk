@@ -81,7 +81,7 @@ USE_SPRD_HWCOMPOSER := true
 USE_OPENGL_RENDERER := true
 USE_OVERLAY_COMPOSER_GPU := true
 DEVICE_FORCE_VIDEO_GO_OVERLAYCOMPOSER := true
-COMMON_GLOBAL_CFLAGS += -DSC8830_HWC
+# COMMON_GLOBAL_CFLAGS += -DSC8830_HWC
 
 # Resolution
 TARGET_SCREEN_HEIGHT := 800
@@ -92,11 +92,6 @@ BOARD_USES_TINYALSA_AUDIO := true
 BOARD_USES_SS_VOIP := true
 BOARD_USE_LIBATCHANNEL_WRAPPER := true
 
-# Board specific features
-#BOARD_USE_VETH := true
-#BOARD_SPRD_RIL := true
-#BOARD_SAMSUNG_RIL := true
-#COMMON_GLOBAL_CFLAGS += -DSPRD_HARDWARE
 
 # Camera
 TARGET_BOARD_CAMERA_HAL_VERSION := HAL1.0
@@ -138,33 +133,36 @@ TARGET_KERNEL_CONFIG := cm_kanas3gnfc_hw04_defconfig
 TARGET_KERNEL_SOURCE := kernel/samsung/kanas3gnfcxx
 
 # Init
-TARGET_NR_SVC_SUPP_GIDS := 48
+TARGET_NR_SVC_SUPP_GIDS := 24
+TARGET_PROVIDES_INIT_RC := true
 
 # Assert
 TARGET_OTA_ASSERT_DEVICE := kanas3gnfc,SM-G355HN,kanas3gnfcxx,SM-G355HN
 
 # SELinux
-# BOARD_SEPOLICY_DIRS += device/samsung/kanas3gnfcxx/sepolicy
-# BOARD_SEPOLICY_UNION :=	\
-#	file.te	\
-#	file_contexts \
-#	seapp_contexts \
-#	theme.te \
-#	healthd.te \
-#	init.te \
-#	init_shell.te \
-#	installd.te \
-#	netd.te \
-#	shell.te \
-#	system.te \
-#	untrusted_app.te \
-#	vold.te	\
-#	zygote.te \
-#	mac_permissions.xml
+BOARD_SEPOLICY_DIRS += vendor/liquid/sepolicy
+# BOARD_SEPOLICY_UNION := \
+# 	debuggerd.te \
+# 	file_contexts \
+# 	seapp_contexts \
+# 	theme.te \
+# 	healthd.te \
+# 	init.te \
+# 	init_shell.te \
+# 	installd.te \
+#  	netd.te \
+# 	shell.te \
+# 	system.te \
+# 	untrusted_app.te \
+# 	vold.te	\
+# 	zygote.te \
+# 	mac_permissions.xml
+
+# Use prebuilt webviewchromium to cut down build time
+# PRODUCT_PREBUILT_WEBVIEWCHROMIUM := yes
 
 # Enable dex-preoptimization to speed up the first boot sequence
-# WITH_DEXPREOPT := true
-
+WITH_DEXPREOPT := true
 
 # CMHW
 BOARD_HARDWARE_CLASS := device/samsung/kanas3gnfcxx/cmhw/
@@ -172,4 +170,23 @@ BOARD_HARDWARE_CLASS := device/samsung/kanas3gnfcxx/cmhw/
 # NFC
 BOARD_HAVE_NFC := true
 
-TW_THEME  := landscape_hdpi
+# Recovery
+BOARD_HAS_NO_SELECT_BUTTON := true
+BOARD_HAS_LARGE_FILESYSTEM := true
+TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
+DEVICE_RESOLUTION := 480x800
+SP1_NAME := "internal_sd"
+SP1_BACKUP_METHOD := files
+SP1_MOUNTABLE := 1
+TW_INTERNAL_STORAGE_PATH := "/data/media/0"
+TW_INTERNAL_STORAGE_MOUNT_POINT := "data"
+TW_EXTERNAL_STORAGE_PATH := "/external_sd"
+TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
+TW_DEFAULT_EXTERNAL_STORAGE := true
+TW_FLASH_FROM_STORAGE := true
+TW_NO_REBOOT_BOOTLOADER := true
+TW_HAS_DOWNLOAD_MODE := true
+TWHAVE_SELINUX := true
+BOARD_HAS_NO_MISC_PARTITION := true
+BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_10x18.h\"
+RECOVERY_GRAPHICS_USE_LINELENGTH := true

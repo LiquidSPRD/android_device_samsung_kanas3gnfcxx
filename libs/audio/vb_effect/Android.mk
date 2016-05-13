@@ -22,6 +22,7 @@ LOCAL_C_INCLUDES += \
 	$(LOCAL_PATH)/../../engmode \
 	$(LOCAL_PATH)/../ \
 	$(LOCAL_PATH)/../nv_exchange \
+	$(LOCAL_PATH)/../../kernel-headers/arch-arm \
 	external/tinyalsa/include
 
 BOARD_EQ_DIR := v1
@@ -30,7 +31,7 @@ ifeq ($(strip $(TARGET_BOARD_PLATFORM)),sc8830)
 BOARD_EQ_DIR := v2
 endif
 
-ifeq ($(strip $(TARGET_BOARD_PLATFORM)),sc7735s)
+ifeq ($(strip $(TARGET_BOARD_PLATFORM)),scx15)
 BOARD_EQ_DIR := v2
 endif
 

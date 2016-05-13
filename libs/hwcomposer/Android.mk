@@ -22,7 +22,7 @@ ifeq ($(strip $(USE_SPRD_HWCOMPOSER)),true)
 include $(CLEAR_VARS)
 
 LOCAL_MODULE_PATH := $(TARGET_OUT_SHARED_LIBRARIES)/hw
-LOCAL_SHARED_LIBRARIES := liblog libEGL libbinder libutils libcutils libGLESv1_CM libhardware libui libsync
+LOCAL_SHARED_LIBRARIES := libion liblog libEGL libbinder libutils libcutils libGLESv1_CM libhardware libui libsync
 LOCAL_SRC_FILES := SprdHWComposer.cpp \
 		   SprdPrimaryDisplayDevice/SprdFrameBufferHAL.cpp \
 		   AndroidFence.cpp \
@@ -58,7 +58,7 @@ DEVICE_WITH_GSP := true
 DEVICE_OVERLAYPLANE_BORROW_PRIMARYPLANE_BUFFER := true
 DEVICE_USE_FB_HW_VSYNC := true
 endif
-ifeq ($(strip $(TARGET_BOARD_PLATFORM)),sc7735s)
+ifeq ($(strip $(TARGET_BOARD_PLATFORM)),scx15)
 DEVICE_WITH_GSP := true
 DEVICE_OVERLAYPLANE_BORROW_PRIMARYPLANE_BUFFER := true
 #DEVICE_PRIMARYPLANE_USE_RGB565 := true
@@ -87,7 +87,7 @@ ifeq ($(strip $(DEVICE_WITH_GSP)),true)
         LOCAL_CLFAGS += -DHWC_SUPPORT
 	endif
 
-	ifeq ($(strip $(TARGET_BOARD_PLATFORM)),sc7735s)
+	ifeq ($(strip $(TARGET_BOARD_PLATFORM)),scx15)
 	LOCAL_CFLAGS += -DGSP_ADDR_TYPE_PHY
 	#LOCAL_CFLAGS += -DGSP_ADDR_TYPE_IOVA
 	#LOCAL_CFLAGS += -DGSP_BLEND_2_LAYERS

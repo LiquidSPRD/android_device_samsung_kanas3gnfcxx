@@ -15,10 +15,72 @@
 LOCAL_PATH := device/samsung/kanas3gnfcxx
 
 # Device uses high-density artwork where available
-PRODUCT_AAPT_CONFIG := normal hdpi xhdpi xxhdpi xxxhdpi tvdpi mdpi ldpi
+$(call inherit-product-if-exists, vendor/samsung/kanas3gnfcxx/kanas3gnfcxx-vendor.mk)
+
+DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
+
+# This device is hdpi
+PRODUCT_AAPT_CONFIG := normal hdpi
 PRODUCT_AAPT_PREF_CONFIG := hdpi
 
-DEVICE_PACKAGE_OVERLAYS += device/samsung/kanas3gnfcxx/overlay
+# Boot animation
+TARGET_SCREEN_HEIGHT := 800
+TARGET_SCREEN_WIDTH := 480
+
+# Init files
+PRODUCT_COPY_FILES += \
+	device/samsung/kanas3gnfcxx/rootdir/init.sc8830_ss.rc:root/init.sc8830_ss.rc \
+	device/samsung/kanas3gnfcxx/rootdir/init.sc8830.usb.rc:root/init.sc8830.usb.rc \
+	device/samsung/kanas3gnfcxx/rootdir/init.sc8830.rc:root/init.sc8830.rc \
+	device/samsung/kanas3gnfcxx/rootdir/init.trace.rc:root/init.trace.rc \
+	device/samsung/kanas3gnfcxx/rootdir/init.kanas3gnfc.rc:root/init.kanas3gnfc.rc \
+	device/samsung/kanas3gnfcxx/rootdir/init.board.rc:root/init.board.rc \
+	device/samsung/kanas3gnfcxx/rootdir/init.kanas3gnfc_base.rc:root/init.kanas3gnfc_base.rc \
+	device/samsung/kanas3gnfcxx/rootdir/init.rc:root/init.rc \
+	device/samsung/kanas3gnfcxx/rootdir/init.usb.rc:root/init.usb.rc \
+	device/samsung/kanas3gnfcxx/rootdir/init.wifi.rc:root/init.wifi.rc \
+	device/samsung/kanas3gnfcxx/rootdir/ueventd.sc8830.rc:root/ueventd.sc8830.rc \
+	device/samsung/kanas3gnfcxx/rootdir/fstab.sc8830:root/fstab.sc8830
+
+# Use prebuilt webviewchromium
+PRODUCT_PACKAGES += \
+	webview \
+	libwebviewchromium_loader.so \
+	libwebviewchromium_plat_support.so
+
+# Wifi
+PRODUCT_PACKAGES += \
+	wpa_supplicant \
+	hostapd
+
+# Override phone-hdpi-512-dalvik-heap to match value on stock
+PRODUCT_PROPERTY_OVERRIDES += \
+	dalvik.vm.heapgrowthlimit=64m
+
+# enable Google-specific location features,
+# like NetworkLocationProvider and LocationCollector
+PRODUCT_PROPERTY_OVERRIDES += \
+	ro.com.google.locationfeatures=1 \
+	ro.com.google.networklocation=1
+
+# Dalvik heap config
+$(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
+
+# we have enough storage space to hold precise GC data
+PRODUCT_TAGS += dalvik.gc.type-precise
+
+# For userdebug builds
+ADDITIONAL_DEFAULT_PROPERTIES += \
+	ro.secure=0 \
+	ro.adb.secure=0 \
+	ro.debuggable=1 \
+	persist.sys.root_access=1 \
+	persist.service.adb.enable=1
+
+PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
+PRODUCT_NAME := full_kanas3gnfcxx
+PRODUCT_DEVICE := kanas3gnfcxx
+
 
 # Keylayouts
 PRODUCT_COPY_FILES += \
@@ -155,12 +217,20 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	ro.kernel.android.checkjni=0 \
 	dalvik.vm.checkjni=false
 
+# For userdebug builds
+ADDITIONAL_DEFAULT_PROPERTIES += \
+	ro.secure=0 \
+	ro.adb.secure=0 \
+	ro.debuggable=1 \
+	persist.sys.root_access=1 \
+	persist.service.adb.enable=1
+
 # Something required for dex2oat (ART)
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-	dalvik.vm.dex2oat-Xms=64m \
-	dalvik.vm.dex2oat-Xmx=384m \
-	dalvik.vm.image-dex2oat-Xms=64m \
-	dalvik.vm.image-dex2oat-Xmx=64m
+# PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+# 	dalvik.vm.dex2oat-Xms=64m \
+# 	dalvik.vm.dex2oat-Xmx=384m \
+# 	dalvik.vm.image-dex2oat-Xms=64m \
+# 	dalvik.vm.image-dex2oat-Xmx=64m
 
 # Support for Browser's saved page feature. This allows
 # for pages saved on previous versions of the OS to be
